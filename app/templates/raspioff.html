@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Reboot or turn off your Hi-Pi</h1>
+
+{% include "flash.html" %}
+
+<div class="well">
+
+<form class="form-group" action="" method="post" name="raspioff">
+    {{ form.hidden_tag() }}
+
+    {% for subfield in form.onoff %}
+    <tr>
+        <td>{{ subfield }}</td>
+        <td>{{ subfield.label }}</td>
+    </tr>
+    {% endfor %}
+
+    <div>
+        <button type="submit" class="btn btn-default">Accept</button>
+    </div>
+
+</form>
+
+</div>
+
+{% endblock %}
