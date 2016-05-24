@@ -10,12 +10,10 @@
 <form class="form-group" action="" method="post" name="raspioff">
     {{ form.hidden_tag() }}
 
-    {% for subfield in form.onoff %}
     <tr>
-        <td>{{ subfield }}</td>
-        <td>{{ subfield.label }}</td>
+        <td>{{ form.onoff.label }}</td>
+        <td>{{ form.onoff }}</td>
     </tr>
-    {% endfor %}
 
     <div>
         <button type="submit" class="btn btn-default">Accept</button>

@@ -1,6 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
 from forms import RaspiOff
+from raspipower import RaspiPower
 
 @app.route('/')
 @app.route('/index')
@@ -17,6 +18,8 @@ def raspioff():
         archivo = open('texto.txt', 'w')
         archivo.write(valor)
         archivo.close()
+        apply = RaspiPower(valor)
+        apply.reboot_shutdown()
         flash('this is a flash test, text saved')
         return redirect(url_for('index'))
     return render_template('raspioff.html', form=form)
