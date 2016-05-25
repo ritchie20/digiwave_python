@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Configure your MPD</h1>
+
+{% include "flash.html" %}
+
+<div class="well">
+
+<form class="form-group" action="" method="post" name="mpdconf">
+    {{ form.hidden_tag() }}
+
+    <tr>
+        <td>{{ form.resampling.label }}</td>
+        <td>{{ form.resampling }}</td>
+        <br>
+    </tr>
+
+    <tr>
+        <td>{{ form.sample_rate.label }}</td>
+        <td>{{ form.sample_rate }}</td>
+        <br>
+    </tr>
+
+    <tr>
+        <td>{{ form.mp3_gapless.label }}</td>
+        <td>{{ form.mp3_gapless }}</td>
+        <br>
+    </tr>
+
+    <tr>
+        <td>{{ form.dsd_pcm.label }}</td>
+        <td>{{ form.dsd_pcm }}</td>
+        <br>
+    </tr>
+
+    <tr>
+        <td>{{ form.vol_norm.label }}</td>
+        <td>{{ form.vol_norm }}</td>
+        <br>
+    </tr>
+
+    <tr>
+        <td>{{ form.audio_buff.label }}</td>
+        <td>{{ form.audio_buff }}</td>
+        <br>
+    </tr>
+
+
+    <tr>
+        <td>{{ form.buff_fill.label }}</td>
+        <td>{{ form.buff_fill }}</td>
+        <br>
+    </tr>
+    <div>
+        <button type="submit" class="btn btn-default">Accept</button>
+    </div>
+
+</form>
+
+</div>
+
+{% endblock %}

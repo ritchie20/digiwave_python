@@ -1,10 +1,12 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
-from forms import RaspiOff
+from forms import RaspiOff, MpdConfig
 from raspipower import RaspiPower
+
 
 @app.route('/')
 @app.route('/index')
+
 
 def index():
     return render_template('index.html')
@@ -14,12 +16,21 @@ def index():
 def raspioff():
     form = RaspiOff()
     if form.validate_on_submit():
-        valor = form.onoff.data
-        archivo = open('texto.txt', 'w')
-        archivo.write(valor)
-        archivo.close()
-        apply = RaspiPower(valor)
-        apply.reboot_shutdown()
+        form_values = form.onoff.data
+        text_file = open('texto.txt', 'w')
+        text_file.write(form_values)
+        text_file.close()
+        power = RaspiPower(form_values)
+        power.reboot_shutdown()
         flash('this is a flash test, text saved')
         return redirect(url_for('index'))
     return render_template('raspioff.html', form=form)
+
+
+@app.route('/mpdconf', methods=['GET', 'POST'])
+def mpdconf():
+    form = MpdConfig()
+    #if form.validate_on_submit():
+        #flash('this is a flash test, text saved')
+        #return redirect(url_for('index'))
+    return render_template('mpdconf.html', form=form)
