@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
-from forms import RaspiOff, MpdConfig
+from forms import RaspiOff, MpdConfig, NetworkConfig, SystemConfig
 from raspipower import RaspiPower
 
 
@@ -27,10 +27,28 @@ def raspioff():
     return render_template('raspioff.html', form=form)
 
 
-@app.route('/mpdconf', methods=['GET', 'POST'])
-def mpdconf():
+@app.route('/mpdconfig', methods=['GET', 'POST'])
+def mpdconfig():
     form = MpdConfig()
     #if form.validate_on_submit():
         #flash('this is a flash test, text saved')
         #return redirect(url_for('index'))
-    return render_template('mpdconf.html', form=form)
+    return render_template('mpdconfig.html', form=form)
+
+
+@app.route('/networkconfig', methods=['GET', 'POST'])
+def networkconfig():
+    form = NetworkConfig()
+    #if form.validate_on_submit():
+        #flash('this is a flash test, text saved')
+        #return redirect(url_for('index'))
+    return render_template('networkconfig.html', form=form)
+
+
+@app.route('/systemconfig', methods=['GET', 'POST'])
+def systemconfig():
+    form = SystemConfig()
+    #if form.validate_on_submit():
+        #flash('this is a flash test, text saved')
+        #return redirect(url_for('index'))
+    return render_template('systemconfig.html', form=form)

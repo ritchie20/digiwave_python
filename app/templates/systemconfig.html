@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Configure your System</h1>
+
+{% include "flash.html" %}
+
+<div class="well">
+
+<form class="form-group" action="" method="post" name="mpdconf">
+    {{ form.hidden_tag() }}
+
+    <tr>
+        <td>{{ form.timezone.label }}</td>
+        <td>{{ form.timezone }}</td>
+        <br>
+    </tr>
+
+    <tr>
+        <td>{{ form.host.label }}</td>
+        <td>{{ form.host }}</td>
+        <br>
+    </tr>
+
+    <tr>
+        <td>{{ form.clearlog.label }}</td>
+        <td>{{ form.clearlog }}</td>
+        <br>
+    </tr>
+
+    <tr>
+        <td>{{ form.clearplay.label }}</td>
+        <td>{{ form.clearplay }}</td>
+        <br>
+    </tr>
+
+
+    <div>
+        <button type="submit" class="btn btn-default">Accept</button>
+    </div>
+
+</form>
+
+</div>
+
+{% endblock %}

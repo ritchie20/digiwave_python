@@ -1,6 +1,6 @@
 from flask.ext.wtf import Form
 from wtforms import StringField, BooleanField, RadioField, SelectField, validators
-#from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired, Length
 
 
 class RaspiOff(Form):
@@ -19,3 +19,17 @@ class MpdConfig(Form):
     buff_fill = SelectField("Buffer fill before play", choices=[('10', '10'), ('20', '20'), ('30', '30'), ('40', '40'),
                                                                 ('50', '50'), ('60', '60'), ('70', '70'), ('80', '80'),
                                                                 ('90', '90'), ('100', '100')])
+
+class NetworkConfig(Form):
+    dhcp = SelectField("DHCP", choices=[('a', 'aaaa'), ('b', 'bbbb'), ('c', 'cccc')])
+    ssid = StringField("WiFi network name", validators=[Length(min=0, max=50)])
+    security = SelectField("Security", choices=[('a', 'aaaa'), ('b', 'bbbb'), ('c', 'cccc')])
+    password = StringField("Password", validators=[Length(min=0, max=50)])
+
+
+class SystemConfig(Form):
+    timezone = SelectField("Timezone", choices=[('a', 'aaa'), ('b', 'bbb'), ('c', 'ccc')])
+    host = StringField("Host name", validators=[Length(min=4, max=50)])
+    clearlog = RadioField("Clear system logs", choices=[('yes', 'Yes'), ('no', 'No')])
+    clearplay = RadioField("Clear playback history", choices=[('yes', 'Yes'), ('no', 'No')])
+
