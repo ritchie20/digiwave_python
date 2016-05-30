@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, BooleanField, RadioField, SelectField, validators
+from wtforms import StringField, BooleanField, RadioField, SelectField, validators, PasswordField
 from wtforms.validators import DataRequired, Length
 
 
@@ -32,4 +32,19 @@ class SystemConfig(Form):
     host = StringField("Host name", validators=[Length(min=4, max=50)])
     clearlog = RadioField("Clear system logs", choices=[('yes', 'Yes'), ('no', 'No')])
     clearplay = RadioField("Clear playback history", choices=[('yes', 'Yes'), ('no', 'No')])
+
+
+class SpotifyConfig(Form):
+    username = StringField("Username", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
+
+
+class GoogleConfig(Form):
+    username = StringField("Username", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
+
+class SoundConfig(Form):
+    username = StringField("Username", validators=[DataRequired()])
+    password = StringField("Password", validators=[DataRequired()])
+
 

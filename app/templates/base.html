@@ -32,16 +32,31 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a></li>
+
                     <li><a href="{{ url_for('raspioff') }}">Power</a></li>
                         <li><a href="#">Sources</a></li>
                         <li><a href="{{ url_for('mpdconfig') }}">MPD</a></li>
                         <li><a href="{{ url_for('networkconfig') }}">Network</a></li>
                         <li><a href="{{ url_for('systemconfig') }}">System</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Streaming Services<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ url_for('spotifyconfig') }}">Spotify</a></li>
+                                    <li><a href="{{ url_for('googleconfig') }}">Google Play Music</a></li>
+                                    <li><a href="{{ url_for('soundconfig') }}">SoundCloud</a></li>
+                                </ul>
+                        </li>
                     </ul>
 
+
+
+
+
                 </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+            </div>
+
+
+            <!-- /.container-fluid -->
         </nav>
 
 
