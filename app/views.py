@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
-from forms import RaspiOff, MpdConfig, NetworkConfig, SystemConfig, SpotifyConfig, GoogleConfig, SoundConfig
-from raspipower import RaspiPower
+from forms import RaspiOff, MpdConfig, NetworkConfig, SystemConfig, SpotifyConfig, GoogleConfig
+from models import RaspiPower
 
 
 @app.route('/')
@@ -12,11 +12,13 @@ def index():
     return render_template('index.html')
 
 
+# Function that routes Raspberry power handling (reboot/shutdown)
 @app.route('/raspioff', methods=['GET', 'POST'])
 def raspioff():
     form = RaspiOff()
+    # This "if" waits until POST is received
     if form.validate_on_submit():
-        #form_values = form.onoff.data
+        # File handling just for testing purposes
         text_file = open('texto.txt', 'w')
         text_file.write(form.onoff.data)
         text_file.close()
@@ -27,18 +29,18 @@ def raspioff():
     return render_template('raspioff.html', form=form)
 
 
+# Function that routes to MPD configuration page
 @app.route('/mpdconfig', methods=['GET', 'POST'])
 def mpdconfig():
     form = MpdConfig()
     if form.validate_on_submit():
-        text_file = open('texto2.txt', 'w')
+        text_file = open('/etc/hosts', 'a')
         text_file.write(form.audio_buff.data)
         text_file.close()
-        #flash('this is a flash test, text saved')
-        #return redirect(url_for('index'))
     return render_template('mpdconfig.html', form=form)
 
 
+# Function that routes to Network configuration page
 @app.route('/networkconfig', methods=['GET', 'POST'])
 def networkconfig():
     form = NetworkConfig()
@@ -48,6 +50,7 @@ def networkconfig():
     return render_template('networkconfig.html', form=form)
 
 
+# Function that routes to System configuration page
 @app.route('/systemconfig', methods=['GET', 'POST'])
 def systemconfig():
     form = SystemConfig()
@@ -57,6 +60,7 @@ def systemconfig():
     return render_template('systemconfig.html', form=form)
 
 
+# Function that routes to Spotify login and configuration page
 @app.route('/spotifyconfig', methods=['GET', 'POST'])
 def spotifyconfig():
     form = SpotifyConfig()
@@ -66,6 +70,7 @@ def spotifyconfig():
     return render_template('spotifyconfig.html', form=form)
 
 
+# Function that routes to Google Play Music login and configuration page
 @app.route('/googleconfig', methods=['GET', 'POST'])
 def googleconfig():
     form = GoogleConfig()
@@ -73,12 +78,3 @@ def googleconfig():
         #flash('this is a flash test, text saved')
         #return redirect(url_for('index'))
     return render_template('googleconfig.html', form=form)
-
-
-@app.route('/soundconfig', methods=['GET', 'POST'])
-def soundconfig():
-    form = SoundConfig()
-    #if form.validate_on_submit():
-        #flash('this is a flash test, text saved')
-        #return redirect(url_for('index'))
-    return render_template('soundconfig.html', form=form)

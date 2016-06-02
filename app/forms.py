@@ -3,10 +3,12 @@ from wtforms import StringField, BooleanField, RadioField, SelectField, validato
 from wtforms.validators import DataRequired, Length
 
 
+# Form used to show an on/off menu for the Raspberry
 class RaspiOff(Form):
     onoff = RadioField('Select Reboot or Shutdown', choices=[('reboot', 'Reboot'), ('shutdown', 'Shutdown')])
 
 
+# Form used to configure mpd config file
 class MpdConfig(Form):
     resampling = SelectField("Resampling", choices=[('disable', 'Disable'), ('enable', 'Enable')])
     sample_rate = SelectField("Sample rate converter",  choices=[('a', 'aaaa'), ('b', 'bbbb'), ('c', 'cccc')])
@@ -20,6 +22,7 @@ class MpdConfig(Form):
                                                                 ('50', '50'), ('60', '60'), ('70', '70'), ('80', '80'),
                                                                 ('90', '90'), ('100', '100')])
 
+# Form to configure network settings
 class NetworkConfig(Form):
     dhcp = SelectField("DHCP", choices=[('a', 'aaaa'), ('b', 'bbbb'), ('c', 'cccc')])
     ssid = StringField("WiFi network name", validators=[Length(min=0, max=50)])
@@ -27,6 +30,7 @@ class NetworkConfig(Form):
     password = StringField("Password", validators=[Length(min=0, max=50)])
 
 
+# Form to configure system settings
 class SystemConfig(Form):
     timezone = SelectField("Timezone", choices=[('a', 'aaa'), ('b', 'bbb'), ('c', 'ccc')])
     host = StringField("Host name", validators=[Length(min=4, max=50)])
@@ -34,17 +38,23 @@ class SystemConfig(Form):
     clearplay = RadioField("Clear playback history", choices=[('yes', 'Yes'), ('no', 'No')])
 
 
+# Form to configure Spotify settings
 class SpotifyConfig(Form):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
+    bitrate = SelectField("Audio Bitrate", choices=[('low', '96 Kbps'), ('medium', '160 Kbps'), ('high', '320 Kbps')])
+    volume_norm = SelectField("Volume Normalization", choices=[('yes', 'Yes'), ('no', 'No')])
+    private = SelectField("Private Session", choices=[('yes', 'Yes'), ('no', 'No')])
 
 
+# Form to configure Google PLay Music settings
 class GoogleConfig(Form):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
+    all_access = SelectField("All Access", choices=[('yes', 'Yes'), ('no', 'No')])
+    bitrate = SelectField("Audio Bitrate", choices=[('low', '128 Kbps'), ('medium', '160 Kbps'), ('high', '320 Kbps')])
+    device_id = StringField("Device ID", validators=[Length(min=16, max=16)])
 
-class SoundConfig(Form):
-    username = StringField("Username", validators=[DataRequired()])
-    password = StringField("Password", validators=[DataRequired()])
+
 
 

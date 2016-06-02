@@ -1,0 +1,1 @@
+/Users/oscarrubio/python/flask/digiwave/app/scripts/raspipower.py
