@@ -1,1 +1,1 @@
-reboot
+shutdown

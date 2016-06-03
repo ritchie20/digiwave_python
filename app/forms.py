@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, Length
 
 # Form used to show an on/off menu for the Raspberry
 class RaspiOff(Form):
-    onoff = RadioField('Select Reboot or Shutdown', choices=[('reboot', 'Reboot'), ('shutdown', 'Shutdown')])
+    on_off = RadioField('Select Reboot or Shutdown', choices=[('reboot', 'Reboot'), ('shutdown', 'Shutdown')])
 
 
 # Form used to configure mpd config file
@@ -34,8 +34,8 @@ class NetworkConfig(Form):
 class SystemConfig(Form):
     timezone = SelectField("Timezone", choices=[('a', 'aaa'), ('b', 'bbb'), ('c', 'ccc')])
     host = StringField("Host name", validators=[Length(min=4, max=50)])
-    clearlog = RadioField("Clear system logs", choices=[('yes', 'Yes'), ('no', 'No')])
-    clearplay = RadioField("Clear playback history", choices=[('yes', 'Yes'), ('no', 'No')])
+    clear_log = RadioField("Clear system logs", choices=[('yes', 'Yes'), ('no', 'No')])
+    clear_play = RadioField("Clear playback history", choices=[('yes', 'Yes'), ('no', 'No')])
 
 
 # Form to configure Spotify settings

@@ -20,9 +20,9 @@ def raspioff():
     if form.validate_on_submit():
         # File handling just for testing purposes
         text_file = open('texto.txt', 'w')
-        text_file.write(form.onoff.data)
+        text_file.write(form.on_off.data)
         text_file.close()
-        power = RaspiPower(form.onoff.data)
+        power = RaspiPower(form.on_off.data)
         power.reboot_shutdown()
         flash('this is a flash test, text saved')
         return redirect(url_for('index'))
