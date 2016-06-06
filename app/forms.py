@@ -42,7 +42,7 @@ class SystemConfig(Form):
 class SpotifyConfig(Form):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
-    bitrate = SelectField("Audio Bitrate", choices=[('low', '96 Kbps'), ('medium', '160 Kbps'), ('high', '320 Kbps')])
+    bitrate = SelectField("Audio Bitrate", choices=[('high', '320 Kbps'), ('medium', '160 Kbps'), ('low', '96 Kbps')])
     volume_norm = SelectField("Volume Normalization", choices=[('yes', 'Yes'), ('no', 'No')])
     private = SelectField("Private Session", choices=[('yes', 'Yes'), ('no', 'No')])
 
@@ -52,7 +52,7 @@ class GoogleConfig(Form):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     all_access = SelectField("All Access", choices=[('yes', 'Yes'), ('no', 'No')])
-    bitrate = SelectField("Audio Bitrate", choices=[('low', '128 Kbps'), ('medium', '160 Kbps'), ('high', '320 Kbps')])
+    bitrate = SelectField("Audio Bitrate", choices=[('high', '320 Kbps'), ('medium', '160 Kbps'), ('low', '128 Kbps')])
     device_id = StringField("Device ID", validators=[Length(min=16, max=16)])
 
 

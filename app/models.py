@@ -55,7 +55,94 @@ class MpdConfigSave(object):
         p = subprocess.Popen(["sudo", "/scripts/mpd_save.py", self.resampling, self.sample_rate, self.mp3_gapless,
                               self.dsd_pcm, self.vol_norm, self.audio_buff, self.buff_fill], stdout=subprocess.PIPE)
         output, err = p.communicate()
-        print "rebooting now, bye mac", output
+        print "saving MPD configuration", output
+
+
+class NetworkConfigSave(object):
+
+    def __init__(self, dhcp, ssid, security, password):
+        self.dhcp = dhcp
+        self.ssid = ssid
+        self.security = security
+        self.password = password
+
+    def network_form_scan(self):
+        if self.dhcp == 'a':
+            self.dhcp = 'default'
+        if self.security == 'a':
+            self.security = 'default'
+
+
+    def network_form_save(self):
+        p = subprocess.Popen(["sudo", "/scripts/network_save.py", self.dhcp, self.ssid, self.security, self.password],
+                             stdout=subprocess.PIPE)
+        output, err = p.communicate()
+        print "saving network configuration", output
+
+
+class SystemConfigSave(object):
+
+    def __init__(self, timezone, host, clear_log, clear_play):
+        self.timezone = timezone
+        self.host = host
+        self.clear_log = clear_log
+        self.clear_play = clear_play
+
+    def system_form_scan(self):
+        if self.timezone == 'a':
+            self.timezone = 'default'
+
+    def system_form_save(self):
+        p = subprocess.Popen(["sudo", "/scripts/system_save.py", self.timezone, self.host, self.clear_log,
+                              self.clear_play], stdout=subprocess.PIPE)
+        output, err = p.communicate()
+        print "saving system configuration", output
+
+
+class SpotifyConfigSave(object):
+
+    def __init__(self, username, password, bitrate, volume_norm, private):
+        self.username = username
+        self.password = password
+        self.bitrate = bitrate
+        self.volume_norm = volume_norm
+        self.private = private
+
+    def spotify_form_scan(self):
+        if self.bitrate == 'high':
+            self.bitrate = 'default'
+        if self.volume_norm == 'yes':
+            self.volume_norm = 'default'
+        if self.private == 'yes':
+            self.private = 'default'
+
+    def spotify_form_save(self):
+        p = subprocess.Popen(["sudo", "scripts/spotify_save.py", self.username, self.password, self.bitrate,
+                              self.volume_norm, self.private], stdout=subprocess.PIPE)
+        output, err = p.communicate()
+        print "Saving Spotify configuration", output
+
+
+class GoogleConfigSave(object):
+
+    def __init__(self, username, password, all_access, bitrate, device_id):
+        self.username = username
+        self.password = password
+        self.all_access = all_access
+        self.bitrate = bitrate
+        self.device_id = device_id
+
+    def google_form_scan(self):
+        if self.all_access == 'yes':
+            self.all_access = 'default'
+        if self.bitrate == 'high':
+            self.bitrate = 'default'
+
+    def google_form_save(self):
+        p = subprocess.Popen(["sudo", "/scripts/google_save.py", self.username, self.password, self.all_access,
+                              self.bitrate, self.device_id], stdout=subprocess.PIPE)
+        output, err = p.communicate()
+        print "Saving Google Play Music configuration", output
 
 
 

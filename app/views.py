@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
 from forms import RaspiOff, MpdConfig, NetworkConfig, SystemConfig, SpotifyConfig, GoogleConfig
-from models import RaspiPower, MpdConfigSave
+from models import RaspiPower, MpdConfigSave, NetworkConfigSave, SystemConfigSave, SpotifyConfigSave, GoogleConfigSave
 
 
 @app.route('/')
@@ -41,9 +41,10 @@ def mpdconfig():
 @app.route('/networkconfig', methods=['GET', 'POST'])
 def networkconfig():
     form = NetworkConfig()
-    #if form.validate_on_submit():
-        #flash('this is a flash test, text saved')
-        #return redirect(url_for('index'))
+    if form.validate_on_submit():
+        network_form = NetworkConfigSave()
+        network_form.network_form_scan()
+        network_form.network_form_save()
     return render_template('networkconfig.html', form=form)
 
 
@@ -51,9 +52,10 @@ def networkconfig():
 @app.route('/systemconfig', methods=['GET', 'POST'])
 def systemconfig():
     form = SystemConfig()
-    #if form.validate_on_submit():
-        #flash('this is a flash test, text saved')
-        #return redirect(url_for('index'))
+    if form.validate_on_submit():
+        system_form = SystemConfigSave()
+        system_form.system_form_scan()
+        system_form.system_form_save()
     return render_template('systemconfig.html', form=form)
 
 
@@ -61,9 +63,10 @@ def systemconfig():
 @app.route('/spotifyconfig', methods=['GET', 'POST'])
 def spotifyconfig():
     form = SpotifyConfig()
-    #if form.validate_on_submit():
-        #flash('this is a flash test, text saved')
-        #return redirect(url_for('index'))
+    if form.validate_on_submit():
+        spotify_form = SpotifyConfigSave()
+        spotify_form.spotify_form_scan()
+        spotify_form.spotify_form_save()
     return render_template('spotifyconfig.html', form=form)
 
 
@@ -71,7 +74,8 @@ def spotifyconfig():
 @app.route('/googleconfig', methods=['GET', 'POST'])
 def googleconfig():
     form = GoogleConfig()
-    #if form.validate_on_submit():
-        #flash('this is a flash test, text saved')
-        #return redirect(url_for('index'))
+    if form.validate_on_submit():
+        google_form = GoogleConfigSave()
+        google_form.google_form_scan()
+        google_form.google_form_save()
     return render_template('googleconfig.html', form=form)
