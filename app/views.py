@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
 from forms import RaspiOff, MpdConfig, NetworkConfig, SystemConfig, SpotifyConfig, GoogleConfig
-from models import RaspiPower
+from models import RaspiPower, MpdConfigSave
 
 
 @app.route('/')
@@ -18,10 +18,6 @@ def raspioff():
     form = RaspiOff()
     # This "if" waits until POST is received
     if form.validate_on_submit():
-        # File handling just for testing purposes
-        text_file = open('texto.txt', 'w')
-        text_file.write(form.on_off.data)
-        text_file.close()
         power = RaspiPower(form.on_off.data)
         power.reboot_shutdown()
         flash('this is a flash test, text saved')
@@ -34,9 +30,10 @@ def raspioff():
 def mpdconfig():
     form = MpdConfig()
     if form.validate_on_submit():
-        text_file = open('/etc/hosts', 'a')
-        text_file.write(form.audio_buff.data)
-        text_file.close()
+        mpd_form = MpdConfigSave(form.resampling.data, form.sample_rate.data, form.mp3_gapless.data,
+                                    form.dsd_pcm.data, form.vol_norm.data, form.audio_buff.data, form.buff_fill.data)
+        mpd_form.mpd_form_scan()
+        mpd_form.mpd_form_save()
     return render_template('mpdconfig.html', form=form)
 
 
