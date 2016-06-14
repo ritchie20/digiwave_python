@@ -23,37 +23,20 @@ class RaspiPower(object):
 
 class MpdConfigSave(object):
 
-    def __init__(self, resampling, sample_rate, mp3_gapless, dsd_pcm, vol_norm, audio_buff, buff_fill):
+    def __init__(self, resampling, sample_rate, mp3_gapless, vol_norm, audio_buff, buff_fill):
         self.resampling = resampling
         self.sample_rate = sample_rate
         self.mp3_gapless = mp3_gapless
-        self.dsd_pcm = dsd_pcm
         self.vol_norm = vol_norm
         self.audio_buff = audio_buff
         self.buff_fill = buff_fill
 
-    # Changing values untouched to "default" string
-    def mpd_form_scan(self):
-        if self.resampling == 'disable':
-            self.resampling = 'default'
-        if self.sample_rate == 'a':
-            self.sample_rate = 'default'
-        if self.mp3_gapless == 'yes':
-            self.mp3_gapless = 'default'
-        if self.dsd_pcm == 'a':
-            self.dsd_pcm = 'default'
-        if self.vol_norm == 'yes':
-            self.vol_norm = 'default'
-        if self.audio_buff == '1mb':
-            self.audio_buff = 'default'
-        if self.buff_fill == '10':
-            self.buff_fill = 'default'
-
     # Calling "mpd_save" script with all the form values
     def mpd_form_save(self):
         # This line calls the script "mpd_save", which has been given root privileges on visudo file
-        p = subprocess.Popen(["sudo", "/scripts/mpd_save.py", self.resampling, self.sample_rate, self.mp3_gapless,
-                              self.dsd_pcm, self.vol_norm, self.audio_buff, self.buff_fill], stdout=subprocess.PIPE)
+        p = subprocess.Popen(["/Users/oscarrubio/python/flask/digiwave/app/scripts/mpd_save.py", self.resampling,
+                              self.sample_rate, self.mp3_gapless, self.vol_norm, self.audio_buff, self.buff_fill],
+                             stdout=subprocess.PIPE)
         output, err = p.communicate()
         print "saving MPD configuration", output
 
@@ -65,13 +48,6 @@ class NetworkConfigSave(object):
         self.ssid = ssid
         self.security = security
         self.password = password
-
-    def network_form_scan(self):
-        if self.dhcp == 'a':
-            self.dhcp = 'default'
-        if self.security == 'a':
-            self.security = 'default'
-
 
     def network_form_save(self):
         p = subprocess.Popen(["sudo", "/scripts/network_save.py", self.dhcp, self.ssid, self.security, self.password],
@@ -87,10 +63,6 @@ class SystemConfigSave(object):
         self.host = host
         self.clear_log = clear_log
         self.clear_play = clear_play
-
-    def system_form_scan(self):
-        if self.timezone == 'a':
-            self.timezone = 'default'
 
     def system_form_save(self):
         p = subprocess.Popen(["sudo", "/scripts/system_save.py", self.timezone, self.host, self.clear_log,
@@ -108,14 +80,6 @@ class SpotifyConfigSave(object):
         self.volume_norm = volume_norm
         self.private = private
 
-    def spotify_form_scan(self):
-        if self.bitrate == 'high':
-            self.bitrate = 'default'
-        if self.volume_norm == 'yes':
-            self.volume_norm = 'default'
-        if self.private == 'yes':
-            self.private = 'default'
-
     def spotify_form_save(self):
         p = subprocess.Popen(["sudo", "scripts/spotify_save.py", self.username, self.password, self.bitrate,
                               self.volume_norm, self.private], stdout=subprocess.PIPE)
@@ -131,12 +95,6 @@ class GoogleConfigSave(object):
         self.all_access = all_access
         self.bitrate = bitrate
         self.device_id = device_id
-
-    def google_form_scan(self):
-        if self.all_access == 'yes':
-            self.all_access = 'default'
-        if self.bitrate == 'high':
-            self.bitrate = 'default'
 
     def google_form_save(self):
         p = subprocess.Popen(["sudo", "/scripts/google_save.py", self.username, self.password, self.all_access,

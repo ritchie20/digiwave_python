@@ -30,9 +30,8 @@ def raspioff():
 def mpdconfig():
     form = MpdConfig()
     if form.validate_on_submit():
-        mpd_form = MpdConfigSave(form.resampling.data, form.sample_rate.data, form.mp3_gapless.data,
-                                    form.dsd_pcm.data, form.vol_norm.data, form.audio_buff.data, form.buff_fill.data)
-        mpd_form.mpd_form_scan()
+        mpd_form = MpdConfigSave(form.resampling.data, form.sample_rate.data, form.mp3_gapless.data, form.vol_norm.data,
+                                 form.audio_buff.data, form.buff_fill.data)
         mpd_form.mpd_form_save()
     return render_template('mpdconfig.html', form=form)
 
@@ -43,7 +42,6 @@ def networkconfig():
     form = NetworkConfig()
     if form.validate_on_submit():
         network_form = NetworkConfigSave()
-        network_form.network_form_scan()
         network_form.network_form_save()
     return render_template('networkconfig.html', form=form)
 
@@ -54,7 +52,6 @@ def systemconfig():
     form = SystemConfig()
     if form.validate_on_submit():
         system_form = SystemConfigSave()
-        system_form.system_form_scan()
         system_form.system_form_save()
     return render_template('systemconfig.html', form=form)
 
@@ -65,7 +62,6 @@ def spotifyconfig():
     form = SpotifyConfig()
     if form.validate_on_submit():
         spotify_form = SpotifyConfigSave()
-        spotify_form.spotify_form_scan()
         spotify_form.spotify_form_save()
     return render_template('spotifyconfig.html', form=form)
 
@@ -76,6 +72,5 @@ def googleconfig():
     form = GoogleConfig()
     if form.validate_on_submit():
         google_form = GoogleConfigSave()
-        google_form.google_form_scan()
         google_form.google_form_save()
     return render_template('googleconfig.html', form=form)
