@@ -32,9 +32,14 @@ def mpdconfig():
     if form.validate_on_submit():
         mpd_form = MpdConfigSave(form.resampling.data, form.sample_rate.data, form.mp3_gapless.data, form.vol_norm.data,
                                  form.audio_buff.data, form.buff_fill.data)
-        mpd_form.mpd_form_save()
-        flash('Your values has been saved, thanks!')
-        return redirect(url_for('index'))
+        error_output = mpd_form.mpd_form_save()
+        # if error output has data, send the message to the view
+        if error_output != '':
+            flash(error_output)
+            return redirect(url_for('index'))
+        else:
+            flash('You changes has been saved!')
+            return redirect(url_for('index'))
     return render_template('mpdconfig.html', form=form)
 
 

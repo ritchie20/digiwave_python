@@ -1,5 +1,6 @@
 import subprocess
 
+
 class RaspiPower(object):
 
     def __init__(self, value):
@@ -37,9 +38,8 @@ class MpdConfigSave(object):
         p = subprocess.Popen(["/Users/oscarrubio/python/flask/digiwave/app/scripts/mpd_save.py", self.resampling,
                               self.sample_rate, self.mp3_gapless, self.vol_norm, self.audio_buff, self.buff_fill],
                              stdout=subprocess.PIPE)
-        output, err = p.communicate()
-        print "saving MPD configuration", output
-
+        output = p.communicate()[0]
+        return output
 
 class NetworkConfigSave(object):
 

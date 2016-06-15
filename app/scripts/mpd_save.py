@@ -18,7 +18,7 @@ def replace_param(comment, parameter, value):
                 break
         # this line means the parameter given doesn't exist, file corruption!
         if parameter_found == 0:
-            return '\nThe ' + parameter + ' does not exit'
+            return parameter
         # if 'comment' parameter it's empty, then don't save it in the file
         if comment == '':
             lines[line_number] = parameter + '  "' + value + '"\n'
@@ -41,18 +41,22 @@ buff_fill = sys.argv[6]
 
 as_comment = '#'
 # calling 'replace_param' with the values picked by the user
+corruption = 'Impossible to save '
 check_error = replace_param('', 'gapless_mp3_playback', mp3_gapless)
-if check_error != '':
-    print check_error
+if check_error == 'gapless_mp3_playback':
+    sys.stdout.write(corruption + '"Gapless mp3 playback"')
 check_error = replace_param('', 'volume_normalization', vol_norm)
-if check_error != '':
-    print check_error
+if check_error == 'volume_normalization':
+    sys.stdout.write(corruption + '"Volume normalization"')
 check_error = replace_param('', 'audio_buffer_size', audio_buff)
-if check_error != '':
-    print check_error
+if check_error == 'audio_buffer_size':
+    sys.stdout.write(corruption + '"Audio Buffer"')
 check_error = replace_param('', 'buffer_before_play', buff_fill)
-if check_error != '':
-    print check_error
+if check_error == 'buffer_before_play':
+    sys.stdout.write(corruption + '"Buffer fill before play"')
+
+
+
 
 
 
