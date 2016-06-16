@@ -2,42 +2,58 @@
 
 {% block content %}
 
-<h1>Configure your MPD</h1>
+<h2>Configure your MPD</h2>
 
 {% include "flash.html" %}
 
+<div class="col-md-6 col-md-offset-3">
 <div class="well">
-
 <form class="form-group" action="" method="post" name="mpdconf">
     {{ form.hidden_tag() }}
 
     <tr>
         <td>{{ form.resampling.label }}</td>
         <td>{{ form.resampling }}</td>
+        <a href="#" data-toggle="popover" data-trigger="focus"
+           data-content="Some content inside the popover">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a>
         <br>
     </tr>
 
     <tr>
         <td>{{ form.sample_rate.label }}</td>
         <td>{{ form.sample_rate }}</td>
+        <a href="#" data-toggle="popover" data-trigger="focus"
+           data-content="Some content inside the popover">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a>
+        </a>
         <br>
     </tr>
 
     <tr>
         <td>{{ form.mp3_gapless.label }}</td>
         <td>{{ form.mp3_gapless }}</td>
+        <a href="#" data-toggle="popover" data-trigger="focus"
+           data-content="Some content inside the popover">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a>
         <br>
     </tr>
 
     <tr>
         <td>{{ form.vol_norm.label }}</td>
         <td>{{ form.vol_norm }}</td>
+        <a href="#" data-toggle="popover" data-trigger="focus"
+           data-content="Some content inside the popover">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a>
         <br>
     </tr>
 
     <tr>
         <td>{{ form.audio_buff.label }}</td>
         <td>{{ form.audio_buff }}</td>
+        <a href="#" data-toggle="popover" data-trigger="focus"
+           data-content="Some content inside the popover">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a>
         <br>
     </tr>
 
@@ -45,6 +61,9 @@
     <tr>
         <td>{{ form.buff_fill.label }}</td>
         <td>{{ form.buff_fill }}</td>
+        <a href="#" data-toggle="popover" data-trigger="focus"
+           data-content="Some content inside the popover">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a>
         <br>
     </tr>
     <div>
@@ -52,7 +71,15 @@
     </div>
 
 </form>
-
 </div>
+</div>
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+</script>
+
 
 {% endblock %}
