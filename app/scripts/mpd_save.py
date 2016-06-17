@@ -35,8 +35,9 @@ resampling = sys.argv[1]
 sample_rate = sys.argv[2]
 mp3_gapless = sys.argv[3]
 vol_norm = sys.argv[4]
-audio_buff = sys.argv[5]
-buff_fill = sys.argv[6]
+replay_gain = sys.argv[5]
+audio_buff = sys.argv[6]
+buff_fill = sys.argv[7]
 
 
 as_comment = '#'
@@ -45,15 +46,22 @@ corruption = 'Impossible to save '
 check_error = replace_param('', 'gapless_mp3_playback', mp3_gapless)
 if check_error == 'gapless_mp3_playback':
     sys.stdout.write(corruption + '"Gapless mp3 playback"')
+
 check_error = replace_param('', 'volume_normalization', vol_norm)
 if check_error == 'volume_normalization':
     sys.stdout.write(corruption + '"Volume normalization"')
+
+check_error = replace_param('', 'replaygain', replay_gain)
+if check_error == 'replaygain':
+    sys.stdout.write(corruption + '"Replay gain"')
+
 check_error = replace_param('', 'audio_buffer_size', audio_buff)
 if check_error == 'audio_buffer_size':
     sys.stdout.write(corruption + '"Audio Buffer"')
+
 check_error = replace_param('', 'buffer_before_play', buff_fill)
 if check_error == 'buffer_before_play':
-    sys.stdout.write(corruption + '"Buffer fill before play"')
+    sys.stdout.write(corruption + '"Buffer before play"')
 
 
 

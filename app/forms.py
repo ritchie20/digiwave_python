@@ -14,10 +14,11 @@ class MpdConfig(Form):
     sample_rate = SelectField("Sample rate converter",  choices=[('a', 'aaaa'), ('b', 'bbbb'), ('c', 'cccc')])
     mp3_gapless = SelectField("Gapless mp3 playback", choices=[('yes', 'Yes'), ('no', 'No')])
     vol_norm = SelectField("Volume normalization", choices=[('no', 'No'), ('yes', 'Yes')])
+    replay_gain = SelectField("Replay Gain", choices=[('off', 'Off'), ('album', 'Album'), ('track', 'Track')])
     audio_buff = SelectField("Audio Buffer (KB)", choices=[('1024', '1 MB'), ('2048', '2 MB'), ('4096', '4 MB'),
                                                            ('6144', '6 MB'), ('8192', '8 MB'), ('12288', '12 MB'),
                                                            ('16384', '16 MB'), ('24456', '24 MB'), ('32768', '32 MB')])
-    buff_fill = SelectField("Buffer fill before play", choices=[('10%', '10%'), ('20%', '20%'), ('30%', '30%'),
+    buff_fill = SelectField("Buffer before play", choices=[('10%', '10%'), ('20%', '20%'), ('30%', '30%'),
                                                                 ('40%', '40%'), ('50%', '50%'), ('60%', '60%'),
                                                                 ('70%', '70%'), ('80%', '80%'), ('90%', '90%'),
                                                                 ('100%', '100%')])

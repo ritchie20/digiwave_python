@@ -69,6 +69,20 @@
 
     <div class="row">
         <div class="col-xs-6 text-right">
+            <label>{{ form.replay_gain.label }}</label>
+        </div>
+        <div class="col-xs-5">
+            <td>{{ form.replay_gain(style= "width:80px;") }}</td>
+            <a href="#" data-toggle="popover" data-trigger="focus" data-placement="left"
+                data-content="This setting can have the argument 'off', 'album' or 'track'. See www.replaygain.org
+                for more details. This setting is off by default.">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 text-right">
             <label>{{ form.audio_buff.label }}</label>
         </div>
         <div class="col-xs-5">

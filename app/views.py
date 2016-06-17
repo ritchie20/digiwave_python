@@ -12,6 +12,11 @@ def index():
     return render_template('index.html')
 
 
+#def regerror(message):
+ #   flash(message)
+  #  return render_template("mpdconfig.html", flashType="danger")
+
+
 # Function that routes Raspberry power handling (reboot/shutdown)
 @app.route('/raspioff', methods=['GET', 'POST'])
 def raspioff():
@@ -30,15 +35,18 @@ def raspioff():
 def mpdconfig():
     form = MpdConfig()
     if form.validate_on_submit():
+        #if int(form.audio_buff.data) > 5000000000:
+         #   flash("error test")
+          #  return redirect(url_for('mpdconfig'), 'warning')
         mpd_form = MpdConfigSave(form.resampling.data, form.sample_rate.data, form.mp3_gapless.data, form.vol_norm.data,
-                                 form.audio_buff.data, form.buff_fill.data)
+                                 form.replay_gain.data, form.audio_buff.data, form.buff_fill.data)
         error_output = mpd_form.mpd_form_save()
         # if error output has data, send the message to the view
         if error_output != '':
-            flash(error_output)
+            flash(error_output, 'danger')
             return redirect(url_for('index'))
         else:
-            flash('You changes has been saved!')
+            flash('You changes has been saved!', 'success')
             return redirect(url_for('index'))
     return render_template('mpdconfig.html', form=form)
 

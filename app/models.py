@@ -24,11 +24,12 @@ class RaspiPower(object):
 
 class MpdConfigSave(object):
 
-    def __init__(self, resampling, sample_rate, mp3_gapless, vol_norm, audio_buff, buff_fill):
+    def __init__(self, resampling, sample_rate, mp3_gapless, vol_norm, replay_gain, audio_buff, buff_fill):
         self.resampling = resampling
         self.sample_rate = sample_rate
         self.mp3_gapless = mp3_gapless
         self.vol_norm = vol_norm
+        self.replay_gain = replay_gain
         self.audio_buff = audio_buff
         self.buff_fill = buff_fill
 
@@ -36,8 +37,8 @@ class MpdConfigSave(object):
     def mpd_form_save(self):
         # This line calls the script "mpd_save", which has been given root privileges on visudo file
         p = subprocess.Popen(["/Users/oscarrubio/python/flask/digiwave/app/scripts/mpd_save.py", self.resampling,
-                              self.sample_rate, self.mp3_gapless, self.vol_norm, self.audio_buff, self.buff_fill],
-                             stdout=subprocess.PIPE)
+                              self.sample_rate, self.mp3_gapless, self.vol_norm, self.replay_gain, self.audio_buff,
+                              self.buff_fill], stdout=subprocess.PIPE)
         output = p.communicate()[0]
         return output
 
