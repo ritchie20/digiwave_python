@@ -81,3 +81,4 @@ def googleconfig():
         google_form = GoogleConfigSave()
         google_form.google_form_save()
     return render_template('googleconfig.html', form=form)
+

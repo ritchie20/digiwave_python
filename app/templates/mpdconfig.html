@@ -2,77 +2,109 @@
 
 {% block content %}
 
-<h2>Configure your MPD</h2>
+<h3>Configure your MPD</h3>
 
 {% include "flash.html" %}
 
 <div class="col-md-6 col-md-offset-3">
-<div class="well">
-<form class="form-group" action="" method="post" name="mpdconf">
+    <div class="well">
+<form action="" method="post" name="mpdconf">
     {{ form.hidden_tag() }}
 
-    <tr>
-        <td>{{ form.resampling.label }}</td>
-        <td>{{ form.resampling }}</td>
-        <a href="#" data-toggle="popover" data-trigger="focus"
-           data-content="Some content inside the popover">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a>
-        <br>
-    </tr>
-
-    <tr>
-        <td>{{ form.sample_rate.label }}</td>
-        <td>{{ form.sample_rate }}</td>
-        <a href="#" data-toggle="popover" data-trigger="focus"
-           data-content="Some content inside the popover">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a>
-        </a>
-        <br>
-    </tr>
-
-    <tr>
-        <td>{{ form.mp3_gapless.label }}</td>
-        <td>{{ form.mp3_gapless }}</td>
-        <a href="#" data-toggle="popover" data-trigger="focus"
-           data-content="Some content inside the popover">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a>
-        <br>
-    </tr>
-
-    <tr>
-        <td>{{ form.vol_norm.label }}</td>
-        <td>{{ form.vol_norm }}</td>
-        <a href="#" data-toggle="popover" data-trigger="focus"
-           data-content="Some content inside the popover">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a>
-        <br>
-    </tr>
-
-    <tr>
-        <td>{{ form.audio_buff.label }}</td>
-        <td>{{ form.audio_buff }}</td>
-        <a href="#" data-toggle="popover" data-trigger="focus"
-           data-content="Some content inside the popover">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a>
-        <br>
-    </tr>
-
-
-    <tr>
-        <td>{{ form.buff_fill.label }}</td>
-        <td>{{ form.buff_fill }}</td>
-        <a href="#" data-toggle="popover" data-trigger="focus"
-           data-content="Some content inside the popover">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a>
-        <br>
-    </tr>
-    <div>
-        <button type="submit" class="btn btn-default">Accept</button>
+    <div class="row">
+        <div class="col-xs-6 text-right">
+            <label>{{ form.resampling.label }}</label>
+            </div>
+        <div class="col-xs-5">
+            <td>{{ form.resampling(style= "width:80px;") }}
+                <a href="#" data-toggle="popover" data-trigger="focus" data-placement="left"
+               data-content="All decoded audio will be converted to the specified
+               format before being passed to the audio outputs. By default is disabled.">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            </a>
+            </td>
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-xs-6 text-right">
+            <label>{{ form.sample_rate.label }}</label>
+        </div>
+        <div class="col-xs-5">
+            <td>{{ form.sample_rate(style= "width:80px;") }}</td>
+            <a href="#" data-toggle="popover" data-trigger="focus" data-placement="left"
+                data-content="Some content inside the popover">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 text-right">
+            <label>{{ form.mp3_gapless.label }}</label>
+        </div>
+        <div class="col-xs-5">
+            <td>{{ form.mp3_gapless(style= "width:80px;") }}</td>
+            <a href="#" data-toggle="popover" data-trigger="focus" data-placement="left"
+                data-content="If your MP3s are ending abruptly, you may disable this setting.
+                If this solves the problem, you should fix the MP3 files
+                with vbrfix and then, re-enable this setting.">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 text-right">
+            <label>{{ form.vol_norm.label }}</label>
+        </div>
+        <div class="col-xs-5">
+            <td>{{ form.vol_norm(style= "width:80px;") }}</td>
+            <a href="#" data-toggle="popover" data-trigger="focus" data-placement="left"
+                data-content="This will adjust all the playing audio to equal loudness. By default is disable.">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 text-right">
+            <label>{{ form.audio_buff.label }}</label>
+        </div>
+        <div class="col-xs-5">
+            <td>{{ form.audio_buff(style= "width:80px;") }}</td>
+            <a href="#" data-toggle="popover" data-trigger="focus" data-placement="left"
+                data-content="This setting adjusts the size of internal decoded audio buffering.
+                    Changing this may have undesired effects. Don't change this if you don't know what you are doing.">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 text-right">
+            <label>{{ form.buff_fill.label }}</label>
+        </div>
+        <div class="col-xs-5">
+            <td>{{ form.buff_fill(style= "width:80px;") }}</td>
+            <a href="#" data-toggle="popover" data-trigger="focus" data-placement="left"
+                data-content="This setting controls the percentage of the buffer which is filled before
+                beginning to play. Increasing this reduces the chance of audio file skipping, at the cost of increased
+                time prior to audio playback.">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 text-right">
+        <button type="submit" class="btn btn-default">Accept</button>
+        </div>
+        </div>
 
 </form>
 </div>
-</div>
+    </div>
 
 
 <script>
