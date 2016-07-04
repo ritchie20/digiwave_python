@@ -36,8 +36,9 @@ sample_rate = sys.argv[2]
 mp3_gapless = sys.argv[3]
 vol_norm = sys.argv[4]
 replay_gain = sys.argv[5]
-audio_buff = sys.argv[6]
-buff_fill = sys.argv[7]
+replaygain_preamp = sys.argv[6]
+audio_buff = sys.argv[7]
+buff_fill = sys.argv[8]
 
 
 as_comment = '#'
@@ -62,6 +63,15 @@ if check_error == 'audio_buffer_size':
 check_error = replace_param('', 'buffer_before_play', buff_fill)
 if check_error == 'buffer_before_play':
     sys.stdout.write(corruption + '"Buffer before play"')
+
+if replaygain_preamp == "":
+    check_error = replace_param(as_comment, 'replaygain_preamp', replaygain_preamp)
+    if check_error == 'replaygain_preamp':
+        sys.stdout.write(corruption + '"Replay Gain Preamp"')
+else:
+    check_error = replace_param('', 'replaygain_preamp', replaygain_preamp)
+    if check_error == 'replaygain_preamp':
+        sys.stdout.write(corruption + '"Replay Gain Preamp"')
 
 
 

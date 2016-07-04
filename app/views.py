@@ -35,11 +35,14 @@ def raspioff():
 def mpdconfig():
     form = MpdConfig()
     if form.validate_on_submit():
-        #if int(form.audio_buff.data) > 5000000000:
-         #   flash("error test")
-          #  return redirect(url_for('mpdconfig'), 'warning')
+        # Validating "replaygain_preamp" value, first if it's empty, then if the values are right
+        if form.replaygain_preamp.data != "":
+            if -15 > int(form.replaygain_preamp.data) or int(form.replaygain_preamp.data) > 15:
+                flash("The value for Replay Gain Preamp needs to be between -15 and 15", "danger")
+                return redirect(url_for('mpdconfig'))
         mpd_form = MpdConfigSave(form.resampling.data, form.sample_rate.data, form.mp3_gapless.data, form.vol_norm.data,
-                                 form.replay_gain.data, form.audio_buff.data, form.buff_fill.data)
+                                 form.replay_gain.data, form.replaygain_preamp.data, form.audio_buff.data,
+                                 form.buff_fill.data)
         error_output = mpd_form.mpd_form_save()
         # if error output has data, send the message to the view
         if error_output != '':
