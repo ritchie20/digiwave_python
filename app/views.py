@@ -1,20 +1,15 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
-from forms import RaspiOff, MpdConfig, NetworkConfig, SystemConfig, SpotifyConfig, GoogleConfig
+from forms import RaspiOff, MpdConfig, NetworkConfig, SystemConfig, SpotifyConfig, GoogleConfig, Dummy
 from models import RaspiPower, MpdConfigSave, NetworkConfigSave, SystemConfigSave, SpotifyConfigSave, GoogleConfigSave
+import time
 
 
 @app.route('/')
+
 @app.route('/index')
-
-
 def index():
     return render_template('index.html')
-
-
-#def regerror(message):
- #   flash(message)
-  #  return render_template("mpdconfig.html", flashType="danger")
 
 
 # Function that routes Raspberry power handling (reboot/shutdown)
@@ -92,4 +87,16 @@ def googleconfig():
         google_form = GoogleConfigSave()
         google_form.google_form_save()
     return render_template('googleconfig.html', form=form)
+
+
+@app.route('/sourcesconfig', methods=['GET', 'POST'])
+def sourcesconfig():
+    form = Dummy()
+    print "si pasa por aca"
+    if form.validate_on_submit():
+        print "tambien pasa por aca"
+        time.sleep(5)
+        flash('Time is working!', 'success')
+        return redirect(url_for('index'))
+    return render_template('sourcesconfig.html', form=form)
 

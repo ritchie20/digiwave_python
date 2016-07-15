@@ -58,5 +58,7 @@ class GoogleConfig(Form):
     device_id = StringField("Device ID", validators=[Length(min=16, max=16)])
 
 
+class Dummy(Form):
+    dummy = StringField("Dummy")
 
 
