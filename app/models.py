@@ -10,13 +10,13 @@ class RaspiPower(object):
     def reboot_shutdown(self):
         if self.value =='reboot':
             # This line calls the script "raspi_reboot.sh", which has been given root privileges on visudo file
-            p = subprocess.Popen(["sudo", "/Users/oscarrubio/python/flask/digiwave/app/scripts/raspi_reboot.sh"],
+            p = subprocess.Popen(["sudo", "/Users/oscar/python/flask/digiwave/app/scripts/raspi_reboot.sh"],
                                  stdout=subprocess.PIPE)
             output, err = p.communicate()
             print "rebooting now, bye mac", output
         elif self.value == 'shutdown':
             # This line calls the script "raspi_shutdown.sh", which has been given root privileges on visudo file
-            p = subprocess.Popen(["sudo", "/Users/oscarrubio/python/flask/digiwave/app/scripts/raspi_shutdown.sh"],
+            p = subprocess.Popen(["sudo", "/Users/oscar/python/flask/digiwave/app/scripts/raspi_shutdown.sh"],
                                  stdout=subprocess.PIPE)
             output, err = p.communicate()
             print "turning off now, bye mac", output
@@ -24,10 +24,7 @@ class RaspiPower(object):
 
 class MpdConfigSave(object):
 
-    def __init__(self, resampling, sample_rate, mp3_gapless, vol_norm, replay_gain, replaygain_preamp, audio_buff,
-                 buff_fill):
-        self.resampling = resampling
-        self.sample_rate = sample_rate
+    def __init__(self, mp3_gapless, vol_norm, replay_gain, replaygain_preamp, audio_buff, buff_fill):
         self.mp3_gapless = mp3_gapless
         self.vol_norm = vol_norm
         self.replay_gain = replay_gain
@@ -38,11 +35,12 @@ class MpdConfigSave(object):
     # Calling "mpd_save" script with all the form values
     def mpd_form_save(self):
         # This line calls the script "mpd_save", which has been given root privileges on visudo file
-        p = subprocess.Popen(["/Users/oscarrubio/python/flask/digiwave/app/scripts/mpd_save.py", self.resampling,
-                              self.sample_rate, self.mp3_gapless, self.vol_norm, self.replay_gain,
-                              self.replaygain_preamp, self.audio_buff, self.buff_fill], stdout=subprocess.PIPE)
+        p = subprocess.Popen(["/Users/oscar/python/flask/digiwave/app/scripts/mpd_save.py", self.mp3_gapless,
+                              self.vol_norm, self.replay_gain, self.replaygain_preamp, self.audio_buff,
+                              self.buff_fill], stdout=subprocess.PIPE)
         output = p.communicate()[0]
         return output
+
 
 class NetworkConfigSave(object):
 

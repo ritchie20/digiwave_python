@@ -10,8 +10,7 @@ class RaspiOff(Form):
 
 # Form used to configure mpd config file
 class MpdConfig(Form):
-    resampling = SelectField("Resampling", choices=[('disable', 'Disable'), ('enable', 'Enable')])
-    sample_rate = SelectField("Sample Rate Converter",  choices=[('a', 'aaaa'), ('b', 'bbbb'), ('c', 'cccc')])
+    # Removed resampling and sample rate
     mp3_gapless = SelectField("Gapless mp3 Playback", choices=[('yes', 'Yes'), ('no', 'No')])
     vol_norm = SelectField("Volume Normalization", choices=[('no', 'No'), ('yes', 'Yes')])
     replay_gain = SelectField("Replay Gain", choices=[('off', 'Off'), ('album', 'Album'), ('track', 'Track')])

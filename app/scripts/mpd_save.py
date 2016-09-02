@@ -6,7 +6,7 @@ import sys
 # Function that replace old value for the new one
 def replace_param(comment, parameter, value):
     # opening the file just as buffer
-    with open('/Users/oscarrubio/mpd2.conf', 'r') as f:
+    with open('/Users/oscar/mpd2.conf', 'r') as f:
         lines = f.readlines()
         line_number = -1
         parameter_found = 0
@@ -26,19 +26,17 @@ def replace_param(comment, parameter, value):
         else:
             lines[line_number] = comment + ' ' + parameter + '  "' + value + '"\n'
     # writing on the same file
-    with open('/Users/oscarrubio/mpd2.conf', 'w') as f:
+    with open('/Users/oscar/mpd2.conf', 'w') as f:
         f.writelines(lines)
 
 
 # assigning arguments to variables
-resampling = sys.argv[1]
-sample_rate = sys.argv[2]
-mp3_gapless = sys.argv[3]
-vol_norm = sys.argv[4]
-replay_gain = sys.argv[5]
-replaygain_preamp = sys.argv[6]
-audio_buff = sys.argv[7]
-buff_fill = sys.argv[8]
+mp3_gapless = sys.argv[1]
+vol_norm = sys.argv[2]
+replay_gain = sys.argv[3]
+replaygain_preamp = sys.argv[4]
+audio_buff = sys.argv[5]
+buff_fill = sys.argv[6]
 
 
 as_comment = '#'

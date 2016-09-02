@@ -35,9 +35,8 @@ def mpdconfig():
             if -15 > int(form.replaygain_preamp.data) or int(form.replaygain_preamp.data) > 15:
                 flash("The value for Replay Gain Preamp needs to be between -15 and 15", "danger")
                 return redirect(url_for('mpdconfig'))
-        mpd_form = MpdConfigSave(form.resampling.data, form.sample_rate.data, form.mp3_gapless.data, form.vol_norm.data,
-                                 form.replay_gain.data, form.replaygain_preamp.data, form.audio_buff.data,
-                                 form.buff_fill.data)
+        mpd_form = MpdConfigSave(form.mp3_gapless.data, form.vol_norm.data, form.replay_gain.data,
+                                 form.replaygain_preamp.data, form.audio_buff.data, form.buff_fill.data)
         error_output = mpd_form.mpd_form_save()
         # if error output has data, send the message to the view
         if error_output != '':

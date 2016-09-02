@@ -13,33 +13,6 @@
 <form action="" method="post" name="mpdconf">
     {{ form.hidden_tag() }}
 
-    <div class="row">
-        <div class="col-xs-6 text-right">
-            <label>{{ form.resampling.label }}</label>
-            </div>
-        <div class="col-xs-5">
-            <td>{{ form.resampling(style= "width:80px;") }}
-                <a href="#" data-toggle="popover" data-trigger="hover" data-placement="bottom"
-               data-content="All decoded audio will be converted to the specified
-               format before being passed to the audio outputs. By default is disabled.">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            </a>
-            </td>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-6 text-right">
-            <label>{{ form.sample_rate.label }}</label>
-        </div>
-        <div class="col-xs-5">
-            <td>{{ form.sample_rate(style= "width:80px;") }}</td>
-            <a href="#" data-toggle="popover" data-trigger="hover" data-placement="bottom"
-                data-content="Some content inside the popover">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            </a>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-xs-6 text-right">
