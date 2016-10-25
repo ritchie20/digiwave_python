@@ -1,4 +1,4 @@
-from flask.ext.wtf import Form
+from flask_wtf import Form
 from wtforms import StringField, BooleanField, RadioField, SelectField, validators, PasswordField
 from wtforms.validators import DataRequired, Length
 
@@ -22,6 +22,7 @@ class MpdConfig(Form):
                                                                 ('40%', '40%'), ('50%', '50%'), ('60%', '60%'),
                                                                 ('70%', '70%'), ('80%', '80%'), ('90%', '90%'),
                                                                 ('100%', '100%')])
+
 
 # Form to configure network settings
 class NetworkConfig(Form):
