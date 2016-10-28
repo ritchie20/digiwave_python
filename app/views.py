@@ -1,8 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
-from forms import RaspiOff, MpdConfig, NetworkConfig, SystemConfig, SpotifyConfig, GoogleConfig, Dummy
-from models import RaspiPower, MpdConfigSave, NetworkConfigSave, SystemConfigSave, SpotifyConfigSave, GoogleConfigSave
-import time
+from forms import RaspiOff, MpdConfig, SystemConfig
+from models import RaspiPower, MpdConfigSave, SystemConfigSave
 
 
 @app.route('/')
@@ -48,16 +47,6 @@ def mpdconfig():
     return render_template('mpdconfig.html', form=form)
 
 
-# Function that routes to Network configuration page
-@app.route('/networkconfig', methods=['GET', 'POST'])
-def networkconfig():
-    form = NetworkConfig()
-    if form.validate_on_submit():
-        network_form = NetworkConfigSave()
-        network_form.network_form_save()
-    return render_template('networkconfig.html', form=form)
-
-
 # Function that routes to System configuration page
 @app.route('/systemconfig', methods=['GET', 'POST'])
 def systemconfig():
@@ -67,35 +56,4 @@ def systemconfig():
         system_form.system_form_save()
     return render_template('systemconfig.html', form=form)
 
-
-# Function that routes to Spotify login and configuration page
-@app.route('/spotifyconfig', methods=['GET', 'POST'])
-def spotifyconfig():
-    form = SpotifyConfig()
-    if form.validate_on_submit():
-        spotify_form = SpotifyConfigSave()
-        spotify_form.spotify_form_save()
-    return render_template('spotifyconfig.html', form=form)
-
-
-# Function that routes to Google Play Music login and configuration page
-@app.route('/googleconfig', methods=['GET', 'POST'])
-def googleconfig():
-    form = GoogleConfig()
-    if form.validate_on_submit():
-        google_form = GoogleConfigSave()
-        google_form.google_form_save()
-    return render_template('googleconfig.html', form=form)
-
-
-@app.route('/sourcesconfig', methods=['GET', 'POST'])
-def sourcesconfig():
-    form = Dummy()
-    print "si pasa por aca"
-    if form.validate_on_submit():
-        print "tambien pasa por aca"
-        time.sleep(5)
-        flash('Time is working!', 'success')
-        return redirect(url_for('index'))
-    return render_template('sourcesconfig.html', form=form)
 
