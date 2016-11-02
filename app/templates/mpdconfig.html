@@ -10,24 +10,10 @@
 
 <div class="col-md-6 col-md-offset-3">
     <div class="well">
-<form action="" method="post" name="mpdconf">
+        <h4>Volume and Replay Gain</h4>
+<form action="" method="post" name="form">
     {{ form.hidden_tag() }}
 
-
-    <div class="row">
-        <div class="col-xs-6 text-right">
-            <label>{{ form.mp3_gapless.label }}</label>
-        </div>
-        <div class="col-xs-5">
-            <td>{{ form.mp3_gapless(style= "width:80px;") }}</td>
-            <a href="#" data-toggle="popover" data-placement="bottom"
-                data-content="If your MP3s are ending abruptly, you may disable this setting.
-                If this solves the problem, you should fix the MP3 files
-                with vbrfix and then, re-enable this setting.">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            </a>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-xs-6 text-right">
@@ -72,10 +58,26 @@
 
     <div class="row">
         <div class="col-xs-6 text-right">
-            <label>{{ form.audio_buff.label }}</label>
+        <button type="submit" class="btn btn-default">Accept</button>
+        </div>
+        </div>
+
+</form>
+
+        <br>
+        <br>
+
+<h4>Buffering</h4>
+
+<form action="" method="post" name="form_2">
+    {{ form.hidden_tag() }}
+
+    <div class="row">
+        <div class="col-xs-6 text-right">
+            <label>{{ form_2.audio_buff.label }}</label>
         </div>
         <div class="col-xs-5">
-            <td>{{ form.audio_buff(style= "width:80px;") }}</td>
+            <td>{{ form_2.audio_buff(style= "width:80px;") }}</td>
             <a href="#" data-toggle="popover" data-placement="bottom"
                 data-content="This setting adjusts the size of internal decoded audio buffering.
                     Changing this may have undesired effects. Don't change this if you don't know what you are doing.">
@@ -86,10 +88,10 @@
 
     <div class="row">
         <div class="col-xs-6 text-right">
-            <label>{{ form.buff_fill.label }}</label>
+            <label>{{ form_2.buff_fill.label }}</label>
         </div>
         <div class="col-xs-5">
-            <td>{{ form.buff_fill(style= "width:80px;") }}</td>
+            <td>{{ form_2.buff_fill(style= "width:80px;") }}</td>
             <a href="#" data-toggle="popover" data-placement="bottom"
                 data-content="This setting controls the percentage of the buffer which is filled before
                 beginning to play. Increasing this reduces the chance of audio file skipping, at the cost of increased
@@ -106,6 +108,7 @@
         </div>
 
 </form>
+
 </div>
     </div>
 

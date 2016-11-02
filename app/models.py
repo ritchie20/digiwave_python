@@ -22,22 +22,33 @@ class RaspiPower(object):
             print "turning off now, bye mac", output
 
 
-class MpdConfigSave(object):
+class MpdVolumeSave(object):
 
-    def __init__(self, mp3_gapless, vol_norm, replay_gain, replaygain_preamp, audio_buff, buff_fill):
-        self.mp3_gapless = mp3_gapless
+    def __init__(self, vol_norm, replay_gain, replaygain_preamp):
         self.vol_norm = vol_norm
         self.replay_gain = replay_gain
         self.replaygain_preamp = replaygain_preamp
+
+    # Calling "mpd_volume_save" script with all the form values
+    def mpd_volume_save(self):
+        # This line calls the script "mpd_volume_save", which has been given root privileges on visudo file
+        p = subprocess.Popen(["/Users/oscar/python/flask/digiwave/app/scripts/mpd_volume_save.py",
+                              self.vol_norm, self.replay_gain, self.replaygain_preamp], stdout=subprocess.PIPE)
+        output = p.communicate()[0]
+        return output
+
+
+class MpdBufferSave(object):
+
+    def __init__(self, audio_buff, buff_fill):
         self.audio_buff = audio_buff
         self.buff_fill = buff_fill
 
-    # Calling "mpd_save" script with all the form values
-    def mpd_form_save(self):
-        # This line calls the script "mpd_save", which has been given root privileges on visudo file
-        p = subprocess.Popen(["/Users/oscar/python/flask/digiwave/app/scripts/mpd_save.py", self.mp3_gapless,
-                              self.vol_norm, self.replay_gain, self.replaygain_preamp, self.audio_buff,
-                              self.buff_fill], stdout=subprocess.PIPE)
+    # Calling "mpd_buffer_save" script with all the form values
+    def mpd_buffer_save(self):
+        # This line calls the script "mpd_buffer_save", which has been given root privileges on visudo file
+        p = subprocess.Popen(["/Users/oscar/python/flask/digiwave/app/scripts/mpd_buffer_save.py",
+                              self.audio_buff, self.buff_fill], stdout=subprocess.PIPE)
         output = p.communicate()[0]
         return output
 
