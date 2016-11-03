@@ -27,20 +27,19 @@ def raspioff():
 # Function that routes to MPD configuration page
 @app.route('/mpdconfig', methods=['GET', 'POST'])
 def mpdconfig():
-    form = MpdVolume()
-    form_2 = MpdBuffer()
-    if form.validate_on_submit():
-        print form.replay_gain.data
+    form_volume = MpdVolume()
+    form_buffer = MpdBuffer()
+    # Validation of "volume" form
+    # //////////////////////////////
+    if form_volume.validate_on_submit():
         # Validating "replaygain_preamp" value, first if it's empty, then if the values are right
-        if form.replaygain_preamp.data != "":
-            if -15 > int(form.replaygain_preamp.data) or int(form.replaygain_preamp.data) > 15:
+        if form_volume.replaygain_preamp.data != "":
+            if -15 > int(form_volume.replaygain_preamp.data) or int(form_volume.replaygain_preamp.data) > 15:
                 flash("The value for Replay Gain Preamp needs to be between -15 and 15", "danger")
                 return redirect(url_for('mpdconfig'))
-        print form.replay_gain.data
-        print "paso 1"
-        mpd_form = MpdVolumeSave(form.vol_norm.data, form.replay_gain.data, form.replaygain_preamp.data)
-        print "paso 2"
-        error_output = mpd_form.mpd_volume_save()
+        mpd_volume = MpdVolumeSave(form_volume.vol_norm.data, form_volume.replay_gain.data,
+                                   form_volume.replaygain_preamp.data)
+        error_output = mpd_volume.mpd_volume_save()
         # if error output has data, send the message to the view
         if error_output != '':
             flash(error_output, 'danger')
@@ -48,10 +47,18 @@ def mpdconfig():
         else:
             flash('You changes has been saved!', 'success')
             return redirect(url_for('index'))
-    #if form_2.validate_on_submit():
-     #   mpd_form !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      #  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    return render_template('mpdconfig.html', form=form, form_2=form_2)
+    # Validation of "buffer" form
+    # ///////////////////////////
+    if form_buffer.validate_on_submit():
+        mpd_buffer = MpdBufferSave(form_buffer.audio_buff.data, form_buffer.buff_fill.data)
+        error_output = mpd_buffer.mpd_buffer_save()
+        if error_output != '':
+            flash(error_output, 'danger')
+            return redirect(url_for('index'))
+        else:
+            flash('Your changes has been saved!', 'success')
+            return redirect(url_for('index'))
+    return render_template('mpdconfig.html', form_volume=form_volume, form_buffer=form_buffer)
 
 
 # Function that routes to System configuration page

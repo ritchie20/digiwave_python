@@ -11,16 +11,16 @@
 <div class="col-md-6 col-md-offset-3">
     <div class="well">
         <h4>Volume and Replay Gain</h4>
-<form action="" method="post" name="form">
-    {{ form.hidden_tag() }}
+<form action="" method="post" name="form_volume">
+    {{ form_volume.hidden_tag() }}
 
 
     <div class="row">
         <div class="col-xs-6 text-right">
-            <label>{{ form.vol_norm.label }}</label>
+            <label>{{ form_volume.vol_norm.label }}</label>
         </div>
         <div class="col-xs-5">
-            <td>{{ form.vol_norm(style= "width:80px;") }}</td>
+            <td>{{ form_volume.vol_norm(style= "width:80px;") }}</td>
             <a href="#" data-toggle="popover" data-placement="bottom"
                 data-content="This will adjust all the playing audio to equal loudness. By default is disable.">
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -30,10 +30,10 @@
 
     <div class="row">
         <div class="col-xs-6 text-right">
-            <label>{{ form.replay_gain.label }}</label>
+            <label>{{ form_volume.replay_gain.label }}</label>
         </div>
         <div class="col-xs-5">
-            <td>{{ form.replay_gain(style= "width:80px;") }}</td>
+            <td>{{ form_volume.replay_gain(style= "width:80px;") }}</td>
             <a href="#" data-toggle="popover" data-placement="bottom"
                 data-content="This setting can have the argument 'off', 'album' or 'track'. See www.replaygain.org
                 for more details. This setting is off by default.">
@@ -44,10 +44,10 @@
 
     <div class="row">
         <div class="col-xs-6 text-right">
-            <label>{{ form.replaygain_preamp.label }}</label>
+            <label>{{ form_volume.replaygain_preamp.label }}</label>
         </div>
         <div class="col-xs-5">
-            <td>{{ form.replaygain_preamp(style= "width:80px;") }}</td>
+            <td>{{ form_volume.replaygain_preamp(style= "width:80px;") }}</td>
             <a href="#" data-toggle="popover" data-placement="bottom"
                 data-content="This setting sets the pre-amp used for files that have ReplayGain tags, valid values
                 are between -15 and 15. By default this setting is disabled.">
@@ -69,15 +69,15 @@
 
 <h4>Buffering</h4>
 
-<form action="" method="post" name="form_2">
-    {{ form.hidden_tag() }}
+<form action="" method="post" name="form_buffer">
+    {{ form_buffer.hidden_tag() }}
 
     <div class="row">
         <div class="col-xs-6 text-right">
-            <label>{{ form_2.audio_buff.label }}</label>
+            <label>{{ form_buffer.audio_buff.label }}</label>
         </div>
         <div class="col-xs-5">
-            <td>{{ form_2.audio_buff(style= "width:80px;") }}</td>
+            <td>{{ form_buffer.audio_buff(style= "width:80px;") }}</td>
             <a href="#" data-toggle="popover" data-placement="bottom"
                 data-content="This setting adjusts the size of internal decoded audio buffering.
                     Changing this may have undesired effects. Don't change this if you don't know what you are doing.">
@@ -88,10 +88,10 @@
 
     <div class="row">
         <div class="col-xs-6 text-right">
-            <label>{{ form_2.buff_fill.label }}</label>
+            <label>{{ form_buffer.buff_fill.label }}</label>
         </div>
         <div class="col-xs-5">
-            <td>{{ form_2.buff_fill(style= "width:80px;") }}</td>
+            <td>{{ form_buffer.buff_fill(style= "width:80px;") }}</td>
             <a href="#" data-toggle="popover" data-placement="bottom"
                 data-content="This setting controls the percentage of the buffer which is filled before
                 beginning to play. Increasing this reduces the chance of audio file skipping, at the cost of increased
