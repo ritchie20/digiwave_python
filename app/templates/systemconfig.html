@@ -2,46 +2,68 @@
 
 {% block content %}
 
-<h1>Configure your System</h1>
+<h3 style="text-align: center;">Configure your System</h3>
 
 {% include "flash.html" %}
 
-<div class="well">
+<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+    <div class="well">
 
-<form class="form-group" action="" method="post" name="mpdconf">
-    {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <h4>Choose your settings</h4>
+        </div>
 
-    <tr>
-        <td>{{ form.timezone.label }}</td>
-        <td>{{ form.timezone }}</td>
-        <br>
-    </tr>
-
-    <tr>
-        <td>{{ form.host.label }}</td>
-        <td>{{ form.host }}</td>
-        <br>
-    </tr>
-
-    <tr>
-        <td>{{ form.clear_log.label }}</td>
-        <td>{{ form.clear_log }}</td>
-        <br>
-    </tr>
-
-    <tr>
-        <td>{{ form.clear_play.label }}</td>
-        <td>{{ form.clear_play }}</td>
-        <br>
-    </tr>
+    <form class="form-group" action="" method="post" name="mpdconf">
+        {{ form.hidden_tag() }}
 
 
-    <div>
-        <button type="submit" class="btn btn-default">Accept</button>
-    </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+                <label>{{ form.timezone.label }}</label>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <td>{{ form.timezone }}</td>
+            </div>
+        </div>
 
-</form>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+                <label>{{ form.host.label }}</label>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <td>{{ form.host }}</td>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+                <label>{{ form.clear_log.label }}</label>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <td>{{ form.clear_log }}</td>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+                <label>{{ form.clear_play.label }}</label>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <td>{{ form.clear_play }}</td>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <button type="submit" class="btn btn-default">Accept</button>
+            </div>
+        </div>
+
+    </form>
 
 </div>
+    </div>
 
 {% endblock %}
