@@ -13,6 +13,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <h4>Choose your settings</h4>
         </div>
+    </div>
 
     <form class="form-group" action="" method="post" name="mpdconf">
         {{ form.hidden_tag() }}
@@ -32,7 +33,7 @@
                 <label>{{ form.host.label }}</label>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <td>{{ form.host }}</td>
+                <td>{{ form.host (style= "width:140px;") }}</td>
             </div>
         </div>
 
@@ -63,7 +64,7 @@
 
     </form>
 
-</div>
     </div>
+</div>
 
 {% endblock %}

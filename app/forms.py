@@ -19,7 +19,7 @@ class MpdVolume(Form):
 # Form to configure system settings
 class SystemConfig(Form):
     timezone = SelectField("Timezone", choices=[('a', 'aaa'), ('b', 'bbb'), ('c', 'ccc')])
-    host = StringField("Host name", validators=[Length(min=4, max=50)])
+    host = StringField("Host name", validators=[Length(min=4, max=40)])
     clear_log = RadioField("Clear system logs", choices=[('yes', 'Yes'), ('no', 'No')])
     clear_play = RadioField("Clear playback history", choices=[('yes', 'Yes'), ('no', 'No')])
 
