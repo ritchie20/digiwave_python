@@ -1,4 +1,5 @@
 import subprocess
+from scripts.get_mpd import GetMpd
 
 
 class RaspiPower(object):
@@ -66,6 +67,15 @@ class SystemConfigSave(object):
                               self.clear_play], stdout=subprocess.PIPE)
         output, err = p.communicate()
         print "saving system configuration", output
+
+
+class ShowMpd(object):
+
+    def get_mpd(self):
+        mpd = GetMpd
+        print mpd
+
+
 
 
 

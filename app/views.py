@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
 from forms import RaspiOff, MpdVolume, SystemConfig, MpdBuffer
-from models import RaspiPower, MpdVolumeSave, SystemConfigSave, MpdBufferSave
+from models import RaspiPower, MpdVolumeSave, SystemConfigSave, MpdBufferSave, GetMpd
 
 
 @app.route('/')
@@ -69,5 +69,15 @@ def systemconfig():
         system_form = SystemConfigSave()
         system_form.system_form_save()
     return render_template('systemconfig.html', form=form)
+
+
+# Sending mpd dictionary to the page
+@app.route('/showmpd')
+def showmpd():
+    result = GetMpd()
+    result = result.get_mpd_params()
+    print result
+    return render_template('showmpd.html', result=result)
+
 
 
