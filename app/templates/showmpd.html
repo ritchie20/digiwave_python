@@ -1,14 +1,17 @@
-{% extends "base.html" %}
-
 {% block content %}
 
-<table>
+<div class="row">
+    <br>
     {% for key, value in result.iteritems() %}
-        <tr>
-            <th> {{ key }} </th>
-            <td> {{ value }} </td>
-        </tr>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+        <label> {{ key }} </label>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <label> {{ value }} </label>
+    </div>
     {% endfor %}
-</table>
+</div>
+<br>
+
 
 {% endblock %}

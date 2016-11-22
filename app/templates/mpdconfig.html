@@ -122,6 +122,21 @@
 </div>
 
 
+ <div class="bs-example">
+    <!-- Button HTML (to Trigger Modal) -->
+    <a href="{{ url_for('showmpd') }}" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">Current Settings</a>
+
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Content will be loaded here from "remote.php" file -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     $('[data-toggle="popover"]').popover({
     container: 'body'});
