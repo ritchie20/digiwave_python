@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, BooleanField, RadioField, SelectField, validators, PasswordField
+from wtforms import StringField, BooleanField, RadioField, SelectField, validators, IntegerField
 from wtforms.validators import DataRequired, Length
 
 
@@ -13,7 +13,7 @@ class MpdVolume(Form):
     # Removed resampling and sample rate
     vol_norm = SelectField("Volume Normalization", choices=[('no', 'No'), ('yes', 'Yes')])
     replay_gain = SelectField("Replay Gain", choices=[('off', 'Off'), ('album', 'Album'), ('track', 'Track')])
-    replaygain_preamp = StringField("Replay Gain Preamp", validators=[Length(min=0, max=3)])
+    replaygain_preamp = IntegerField("Replay Gain Preamp", [validators.NumberRange(min=-15, max=15)])
 
 
 # Form to configure system settings
