@@ -25,7 +25,7 @@ class GetMpd(object):
                         mpd_params['Replay Gain Preamp'] = value
                 if 'audio_buffer_size' in line:
                     command, value = line.split()
-                    mpd_params['Audio Buffer (Mb)'] = value
+                    mpd_params['Audio Buffer (Kb)'] = value
                 if 'buffer_before_play' in line:
                     command, value = line.split()
                     mpd_params['Buffer Before Play'] = value
