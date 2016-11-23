@@ -13,13 +13,14 @@ class MpdVolume(Form):
     # Removed resampling and sample rate
     vol_norm = SelectField("Volume Normalization", choices=[('no', 'No'), ('yes', 'Yes')])
     replay_gain = SelectField("Replay Gain", choices=[('off', 'Off'), ('album', 'Album'), ('track', 'Track')])
-    replaygain_preamp = IntegerField("Replay Gain Preamp", [validators.NumberRange(min=-15, max=15)])
+    replaygain_preamp = IntegerField("Replay Gain Preamp", [validators.NumberRange(min=-15, max=15),
+                                                            validators.Optional()])
 
 
 # Form to configure system settings
 class SystemConfig(Form):
     timezone = SelectField("Timezone", choices=[('a', 'aaa'), ('b', 'bbb'), ('c', 'ccc')])
-    host = StringField("Host name", validators=[Length(min=4, max=40)])
+    host = StringField("Host name", [validators.Length(min=4, max=40)])
     clear_log = RadioField("Clear system logs", choices=[('yes', 'Yes'), ('no', 'No')])
     clear_play = RadioField("Clear playback history", choices=[('yes', 'Yes'), ('no', 'No')])
 
