@@ -32,11 +32,6 @@ def mpdconfig():
     # Validation of "volume" form
     # //////////////////////////////
     if form_volume.validate_on_submit():
-        # Validating "replaygain_preamp" value, first if it's empty, then if the values are right
-        #if form_volume.replaygain_preamp.data != "":
-         #   if -15 > int(form_volume.replaygain_preamp.data) or int(form_volume.replaygain_preamp.data) > 15:
-          #      flash("The value for Replay Gain Preamp needs to be between -15 and 15", "danger")
-           #     return redirect(url_for('mpdconfig'))
         mpd_volume = MpdVolumeSave(form_volume.vol_norm.data, form_volume.replay_gain.data,
                                    str(form_volume.replaygain_preamp.data))
         error_output = mpd_volume.mpd_volume_save()
