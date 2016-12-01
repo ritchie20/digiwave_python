@@ -54,27 +54,11 @@ class MpdBufferSave(object):
         return output
 
 
-class SystemConfigSave(object):
-
-    def __init__(self, timezone, host, clear_log, clear_play):
-        self.timezone = timezone
-        self.host = host
-        self.clear_log = clear_log
-        self.clear_play = clear_play
-
-    def system_form_save(self):
-        p = subprocess.Popen(["sudo", "/scripts/system_save.py", self.timezone, self.host, self.clear_log,
-                              self.clear_play], stdout=subprocess.PIPE)
-        output, err = p.communicate()
-        print "saving system configuration", output
-        return output
-
-
 class ShowMpd(object):
 
     def get_mpd(self):
         mpd = GetMpd
-        print mpd
+        return mpd
 
 
 class HostnameSave(object):
@@ -86,7 +70,6 @@ class HostnameSave(object):
         p = subprocess.Popen(["sudo", "/Users/oscar/python/flask/digiwave/app/scripts/hostname_save.py",
                               self.hostname], stdout=subprocess.PIPE)
         output = p.communicate()[0]
-        print output
         return output
 
 

@@ -17,14 +17,6 @@ class MpdVolume(Form):
                                                             validators.Optional()])
 
 
-# Form to configure system settings
-class SystemConfig(Form):
-    timezone = SelectField("Timezone", choices=[('a', 'aaa'), ('b', 'bbb'), ('c', 'ccc')])
-    host = StringField("Host name", [validators.Length(min=4, max=40)])
-    clear_log = RadioField("Clear system logs", choices=[('yes', 'Yes'), ('no', 'No')])
-    clear_play = RadioField("Clear playback history", choices=[('yes', 'Yes'), ('no', 'No')])
-
-
 # Form to configure MPD buffer settings
 class MpdBuffer(Form):
     audio_buff = SelectField("Audio Buffer (KB)", choices=[('1024', '1 MB'), ('2048', '2 MB'), ('4096', '4 MB'),
