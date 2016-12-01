@@ -76,6 +76,16 @@ class ShowMpd(object):
         print mpd
 
 
+class HostnameSave(object):
+
+    def __init__(self, hostname):
+        self.hostname = hostname
+
+    def hostname_save(self):
+        p = subprocess.Popen(["sudo", "/scripts/system_save.py", self.hostname], stdout=subprocess.PIPE)
+        output, err = p.communicate()
+        print "saving system configuration", output
+
 
 
 

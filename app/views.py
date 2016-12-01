@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
-from forms import RaspiOff, MpdVolume, SystemConfig, MpdBuffer
-from models import RaspiPower, MpdVolumeSave, SystemConfigSave, MpdBufferSave, GetMpd
+from forms import RaspiOff, MpdVolume, SystemConfig, MpdBuffer, Hostname
+from models import RaspiPower, MpdVolumeSave, SystemConfigSave, MpdBufferSave, GetMpd, HostnameSave
 
 
 @app.route('/')
@@ -15,12 +15,22 @@ def index():
 @app.route('/raspioff', methods=['GET', 'POST'])
 def raspioff():
     form = RaspiOff()
+    form_host = Hostname()
     # This "if" waits until POST is received
     if form.validate_on_submit():
         power = RaspiPower(form.on_off.data)
         power.reboot_shutdown()
         flash('this is a flash test, text saved')
         return redirect(url_for('index'))
+    if form_host.validate_on_submit():
+        mpd_hostname = HostnameSave(form_host.hostname.data)
+        error_output = mpd_hostname.hostname_save()
+        if error_output != '':
+            flash(error_output, 'danger')
+            return redirect(url_for('index'))
+        else:
+            flash('You changes has been saved!', 'success')
+            return redirect(url_for('index'))
     return render_template('raspioff.html', form=form)
 
 
