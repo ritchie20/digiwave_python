@@ -31,7 +31,7 @@ def raspioff():
         else:
             flash('You changes has been saved!', 'success')
             return redirect(url_for('index'))
-    return render_template('raspioff.html', form=form)
+    return render_template('raspioff.html', form=form, form_host=form_host)
 
 
 # Function that routes to MPD configuration page
