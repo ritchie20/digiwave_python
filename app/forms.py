@@ -38,6 +38,6 @@ class MpdBuffer(Form):
 
 # Form to save new hostname name
 class Hostname(Form):
-    hostname = StringField("Hostname", [validators.length(min=4, max=40),
+    hostname = StringField("Hostname", [validators.length(min=4, max=30),
                                         validators.regexp('^\w+$',
                                         message="The Hostname must contain only letters, numbers or underscore")])
