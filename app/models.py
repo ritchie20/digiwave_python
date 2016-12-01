@@ -82,7 +82,7 @@ class HostnameSave(object):
         self.hostname = hostname
 
     def hostname_save(self):
-        p = subprocess.Popen(["sudo", "/scripts/system_save.py", self.hostname], stdout=subprocess.PIPE)
+        p = subprocess.Popen(["sudo", "/scripts/hostname_save.py", self.hostname], stdout=subprocess.PIPE)
         output, err = p.communicate()
         print "saving system configuration", output
 
