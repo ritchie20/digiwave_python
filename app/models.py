@@ -67,6 +67,7 @@ class SystemConfigSave(object):
                               self.clear_play], stdout=subprocess.PIPE)
         output, err = p.communicate()
         print "saving system configuration", output
+        return output
 
 
 class ShowMpd(object):
@@ -82,9 +83,11 @@ class HostnameSave(object):
         self.hostname = hostname
 
     def hostname_save(self):
-        p = subprocess.Popen(["sudo", "/scripts/hostname_save.py", self.hostname], stdout=subprocess.PIPE)
-        output, err = p.communicate()
-        print "saving system configuration", output
+        p = subprocess.Popen(["sudo", "/Users/oscar/python/flask/digiwave/app/scripts/hostname_save.py",
+                              self.hostname], stdout=subprocess.PIPE)
+        output = p.communicate()[0]
+        print output
+        return output
 
 
 

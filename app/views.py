@@ -24,6 +24,7 @@ def raspioff():
         return redirect(url_for('index'))
     if form_host.validate_on_submit():
         mpd_hostname = HostnameSave(form_host.hostname.data)
+        print
         error_output = mpd_hostname.hostname_save()
         if error_output != '':
             flash(error_output, 'danger')
