@@ -47,11 +47,11 @@ if check_error == 'volume_normalization':
 if check_error == 2:
     sys.stdout.write('"The configuration file does not exit"')
 
-check_error = replace_param('', 'replaygain', replay_gain)
+check_error = replace_param('', 'replaygain ', replay_gain)
 if check_error == 'replaygain':
     sys.stdout.write('"Error trying to save Replay gain value"')
 
-if replaygain_preamp == "":
+if replaygain_preamp == "None":
     check_error = replace_param(as_comment, 'replaygain_preamp', replaygain_preamp)
     if check_error == 'replaygain_preamp':
         sys.stdout.write('"Error trying to save Replay Gain Preamp value"')

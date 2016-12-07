@@ -70,6 +70,10 @@ class HostnameSave(object):
         p = subprocess.Popen(["sudo", "/Users/oscar/python/flask/digiwave/app/scripts/hostname_save.py",
                               self.hostname], stdout=subprocess.PIPE)
         output = p.communicate()[0]
+        if output == "":
+            p = subprocess.Popen(["sudo", "/Users/oscar/python/flask/digiwave/app/scripts/raspi_reboot.sh"],
+                                 stdout=subprocess.PIPE)
+            output = p.communicate()
         return output
 
 
