@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
-from forms import RaspiOff, MpdVolume, MpdBuffer, Hostname
+from forms import RaspiOff, MpdVolume, MpdBuffer, Hostname, WifiLogin
 from models import RaspiPower, MpdVolumeSave, MpdBufferSave, GetMpd, HostnameSave
 
 
@@ -16,15 +16,16 @@ def index():
 def raspioff():
     form = RaspiOff()
     form_host = Hostname()
+    form_wifi = WifiLogin()
     # This "if" waits until POST is received
-    if form.validate_on_submit():
+
+    if form.submit3.data and form.validate_on_submit():
         power = RaspiPower(form.on_off.data)
         power.reboot_shutdown()
-        flash('this is a flash test, text saved')
+        # flash('this is a flash test, text saved')
         return redirect(url_for('index'))
-    if form_host.validate_on_submit():
+    if form_host.submit1.data and form_host.validate_on_submit():
         mpd_hostname = HostnameSave(form_host.hostname.data)
-        print
         error_output = mpd_hostname.hostname_save()
         if error_output != '':
             flash(error_output, 'danger')
@@ -32,7 +33,15 @@ def raspioff():
         else:
             flash('You changes has been saved!', 'success')
             return redirect(url_for('index'))
-    return render_template('raspioff.html', form=form, form_host=form_host)
+    if form_wifi.submit2.data and form_wifi.validate_on_submit():
+        print form_wifi.wifi_name.data
+        print form_wifi.password.data
+        print form_wifi.submit2.data
+        # wifi = RaspiPower(form_wifi.wifi_name.data, form_wifi.password.data)
+        # power.reboot_shutdown()
+        # flash('this is a flash test, text saved')
+        # return redirect(url_for('index'))
+    return render_template('raspioff.html', form=form, form_host=form_host, form_wifi=form_wifi)
 
 
 # Function that routes to MPD configuration page
