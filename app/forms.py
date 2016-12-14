@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, BooleanField, RadioField, SelectField, validators, IntegerField
+from wtforms import StringField, PasswordField, RadioField, SelectField, validators, IntegerField
 from wtforms.validators import DataRequired, Length
 
 
@@ -33,3 +33,9 @@ class Hostname(Form):
     hostname = StringField("Hostname", [validators.length(min=4, max=30),
                                         validators.regexp('^\w+$',
                                         message="The Hostname must contain only letters, numbers or underscore")])
+
+
+class WifiLogin(Form):
+    wifi_name = StringField("Wifi Name", [validators.DataRequired()])
+    password = PasswordField("Password", validators.DataRequired())
+
