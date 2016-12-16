@@ -1,5 +1,6 @@
 import subprocess
 from scripts.get_mpd import GetMpd
+from scripts.get_wifi import GetWifi
 
 
 class RaspiPower(object):
@@ -58,6 +59,13 @@ class ShowMpd(object):
 
     def get_mpd(self):
         mpd = GetMpd
+        return mpd
+
+
+class ShowWifi(object):
+
+    def get_wifi(self):
+        mpd = GetWifi
         return mpd
 
 

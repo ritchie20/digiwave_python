@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
 from forms import RaspiOff, MpdVolume, MpdBuffer, Hostname, WifiLogin
-from models import RaspiPower, MpdVolumeSave, MpdBufferSave, GetMpd, HostnameSave, WifiLoginSave
+from models import RaspiPower, MpdVolumeSave, MpdBufferSave, GetMpd, HostnameSave, WifiLoginSave, GetWifi
 
 
 @app.route('/')
@@ -90,6 +90,13 @@ def showmpd():
     result = GetMpd()
     result = result.get_mpd_params()
     return render_template('showmpd.html', result=result)
+
+
+@app.route('/showwifi')
+def showwifi():
+    result = GetWifi()
+    result = result.get_wifi_networks()
+    return render_template('showwifi.html', result=result)
 
 
 
