@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
 from forms import RaspiOff, MpdVolume, MpdBuffer, Hostname, WifiLogin
-from models import RaspiPower, MpdVolumeSave, MpdBufferSave, GetMpd, HostnameSave
+from models import RaspiPower, MpdVolumeSave, MpdBufferSave, GetMpd, HostnameSave, WifiLoginSave
 
 
 @app.route('/')
@@ -34,9 +34,17 @@ def raspioff():
             flash('You changes has been saved!', 'success')
             return redirect(url_for('index'))
     if form_wifi.submit2.data and form_wifi.validate_on_submit():
-        print form_wifi.wifi_name.data
-        print form_wifi.password.data
-        print form_wifi.submit2.data
+        mpd_wifi = WifiLoginSave(form_wifi.wifi_name.data, form_wifi.password.data)
+        error_output = mpd_wifi.wifi_login_save()
+        # print form_wifi.wifi_name.data
+        # print form_wifi.password.data
+        # print form_wifi.submit2.data
+        if error_output != '':
+            flash(error_output, 'danger')
+            return redirect(url_for('index'))
+        else:
+            flash('You changes has been saved!', 'success')
+            return redirect(url_for('index'))
         # wifi = RaspiPower(form_wifi.wifi_name.data, form_wifi.password.data)
         # power.reboot_shutdown()
         # flash('this is a flash test, text saved')

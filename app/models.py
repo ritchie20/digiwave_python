@@ -77,7 +77,18 @@ class HostnameSave(object):
         return output
 
 
+class WifiLoginSave(object):
 
+    def __init__(self, wifi_name, password):
+        self.wifi_name = wifi_name
+        self.password = password
 
+    # Calling "mpd_volume_save" script with all the form values
+    def wifi_login_save(self):
+        # This line calls the script "mpd_volume_save", which has been given root privileges on visudo file
+        p = subprocess.Popen(["/Users/oscar/python/flask/digiwave/app/scripts/wifi_save.py",
+                              self.wifi_name, self.password], stdout=subprocess.PIPE)
+        output = p.communicate()[0]
+        return output
 
 
