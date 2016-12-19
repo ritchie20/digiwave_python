@@ -7,6 +7,9 @@
 <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
     <div class="well">
 
+
+    <!-- form to reboot/shutdown the player -->
+    <!-- ================================== -->
     <form class="form-group" action="" method="post" name="raspioff">
         {{ form.hidden_tag() }}
 
@@ -23,6 +26,7 @@
         </div>
 
         <div class="row">
+            <!-- field that submit the form back to python -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <label>{{ form.submit3(class_="btn btn-default") }}</label>
             </div>
@@ -33,11 +37,15 @@
     <br>
 
 
+
+    <!-- form to set the name of the player -->
+    <!-- ================================== -->
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <h4>Change your DigiWave's name</h4>
         </div>
     </div>
+
 
     <form action="" method="post" name="form_host" value="form_host">
         {{ form_host.hidden_tag() }}
@@ -58,6 +66,7 @@
         </div>
 
 
+        <!-- Validation for hostname value -->
         <div class="row">
 	        <div class="col-lg-9 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-9 col-sm-offset-3 col-xs-12">
                 {% if form_host.hostname.errors %}
@@ -73,6 +82,7 @@
         <br>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <!-- field that submit the form back to python -->
                 <label>{{ form_host.submit1(class_="btn btn-default") }}</label>
             </div>
         </div>
@@ -83,11 +93,13 @@
     <br>
 
 
+        <!-- form to enable wifi on the player -->
+        <!-- ================================== -->
         <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <h4>Wifi Configuration</h4>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h4>Wifi Configuration</h4>
+            </div>
         </div>
-    </div>
 
 
     <form action="" method="post" name="form_wifi" value="form_wifi">
@@ -101,13 +113,13 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <td>{{ form_wifi.wifi_name(style= "width:100px;") }}</td>
                     <a href="#" data-toggle="popover" data-placement="bottom"
-                    data-content="You can copy the name of the network from the 'Check Wifi' button">
+                    data-content="You can copy the name of the network from the 'Wifi Networks' button">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     </a>
             </div>
         </div>
 
-
+        <!-- Validation for wifi_name value -->
         <div class="row">
 	        <div class="col-lg-9 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-9 col-sm-offset-3 col-xs-12">
                 {% if form_wifi.wifi_name.errors %}
@@ -132,7 +144,7 @@
             </div>
         </div>
 
-
+        <!-- Validation for password value -->
         <div class="row">
 	        <div class="col-lg-9 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-9 col-sm-offset-3 col-xs-12">
                 {% if form_wifi.password.errors %}
@@ -151,6 +163,7 @@
         <br>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <!-- field that submit the form back to python -->
                 <label>{{ form_wifi.submit2(class_="btn btn-default") }}</label>
             </div>
         </div>
@@ -166,6 +179,8 @@
 
 
 
+    <!-- modal to call showwifi page -->
+    <!-- =========================== -->
     <div class="bs-example">
     <!-- Button HTML (to Trigger Modal) -->
         <a href="{{ url_for('showwifi') }}" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Wifi Networks</a>
