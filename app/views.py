@@ -11,9 +11,9 @@ def index():
     return render_template('index.html')
 
 
-# Function that routes Raspberry power handling (reboot/shutdown)
-@app.route('/raspioff', methods=['GET', 'POST'])
-def raspioff():
+# Function that routes Raspberry power handling (reboot/shutdown) and audio output
+@app.route('/systemconfig', methods=['GET', 'POST'])
+def systemconfig():
     form = RaspiOff()
     form_host = Hostname()
     form_wifi = WifiLogin()
@@ -36,20 +36,13 @@ def raspioff():
     if form_wifi.submit2.data and form_wifi.validate_on_submit():
         mpd_wifi = WifiLoginSave(form_wifi.wifi_name.data, form_wifi.password.data)
         error_output = mpd_wifi.wifi_login_save()
-        # print form_wifi.wifi_name.data
-        # print form_wifi.password.data
-        # print form_wifi.submit2.data
         if error_output != '':
             flash(error_output, 'danger')
             return redirect(url_for('index'))
         else:
             flash('You changes has been saved!', 'success')
             return redirect(url_for('index'))
-        # wifi = RaspiPower(form_wifi.wifi_name.data, form_wifi.password.data)
-        # power.reboot_shutdown()
-        # flash('this is a flash test, text saved')
-        # return redirect(url_for('index'))
-    return render_template('raspioff.html', form=form, form_host=form_host, form_wifi=form_wifi)
+    return render_template('systemconfig.html', form=form, form_host=form_host, form_wifi=form_wifi)
 
 
 # Function that routes to MPD configuration page
@@ -99,4 +92,28 @@ def showwifi():
     return render_template('showwifi.html', result=result)
 
 
-
+# Function that routes Raspberry hostname and wifi handling
+@app.route('/networkconfig', methods=['GET', 'POST'])
+def networkconfig():
+    form_host = Hostname()
+    form_wifi = WifiLogin()
+    # This "if" waits until POST is received
+    if form_host.submit1.data and form_host.validate_on_submit():
+        mpd_hostname = HostnameSave(form_host.hostname.data)
+        error_output = mpd_hostname.hostname_save()
+        if error_output != '':
+            flash(error_output, 'danger')
+            return redirect(url_for('index'))
+        else:
+            flash('You changes has been saved!', 'success')
+            return redirect(url_for('index'))
+    if form_wifi.submit2.data and form_wifi.validate_on_submit():
+        mpd_wifi = WifiLoginSave(form_wifi.wifi_name.data, form_wifi.password.data)
+        error_output = mpd_wifi.wifi_login_save()
+        if error_output != '':
+            flash(error_output, 'danger')
+            return redirect(url_for('index'))
+        else:
+            flash('You changes has been saved!', 'success')
+            return redirect(url_for('index'))
+    return render_template('networkconfig.html', form_host=form_host, form_wifi=form_wifi)

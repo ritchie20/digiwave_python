@@ -1,40 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3 style="text-align: center;">System Settings</h3>
+<h3 style="text-align: center;">Network Settings</h3>
 
 {% include "flash.html" %}
 <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
     <div class="well">
-
-
-    <!-- form to reboot/shutdown the player -->
-    <!-- ================================== -->
-    <form class="form-group" action="" method="post" name="raspioff">
-        {{ form.hidden_tag() }}
-
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h4>Reboot/Shutdown your DigiWave</h4>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-4 col-md-8 col-md-offset-4 col-sm-8 col-sm-offset-4 col-xs-8 col-xs-offset-4">
-                <td>{{ form.on_off }}</td>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- field that submit the form back to python -->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <label>{{ form.submit3(class_="btn btn-default") }}</label>
-            </div>
-        </div>
-    </form>
-
-    <br>
-    <br>
 
 
 
