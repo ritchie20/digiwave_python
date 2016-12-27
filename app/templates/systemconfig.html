@@ -28,13 +28,44 @@
         <div class="row">
             <!-- field that submit the form back to python -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <label>{{ form.submit3(class_="btn btn-default") }}</label>
+                <label>{{ form.submit_off(class_="btn btn-default") }}</label>
             </div>
         </div>
     </form>
 
     <br>
     <br>
+
+
+    <!-- form to select audio output in the player -->
+    <!-- ================================== -->
+
+        <form action="" method="post" name="form_buffer">
+            {{ form_audio.hidden_tag() }}
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+                    <label>{{ form_audio.audio_output.label }}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <td>{{ form_audio.audio_output(style= "width:110px;") }}</td>
+                        <a href="#" data-toggle="popover" data-placement="bottom"
+                        data-content="This setting adjusts the size of internal decoded audio buffering.
+                        Changing this may have undesired effects. Don't change this if you don't know what you are doing.">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        </a>
+                </div>
+            </div>
+
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <label>{{ form_audio.submit_audio(class_="btn btn-default") }}</label>
+            </div>
+        </div>
+
+        </form>
+
 
 
 

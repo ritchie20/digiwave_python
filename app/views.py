@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
-from forms import RaspiOff, MpdVolume, MpdBuffer, Hostname, WifiLogin
+from forms import RaspiOff, MpdVolume, MpdBuffer, Hostname, WifiLogin, AudioOutput
 from models import RaspiPower, MpdVolumeSave, MpdBufferSave, GetMpd, HostnameSave, WifiLoginSave, GetWifi
 
 
@@ -15,34 +15,24 @@ def index():
 @app.route('/systemconfig', methods=['GET', 'POST'])
 def systemconfig():
     form = RaspiOff()
-    form_host = Hostname()
-    form_wifi = WifiLogin()
+    form_audio = AudioOutput()
     # This "if" waits until POST is received
-
-    if form.submit3.data and form.validate_on_submit():
+    if form.submit_off.data and form.validate_on_submit():
         power = RaspiPower(form.on_off.data)
         power.reboot_shutdown()
         # flash('this is a flash test, text saved')
         return redirect(url_for('index'))
-    if form_host.submit1.data and form_host.validate_on_submit():
-        mpd_hostname = HostnameSave(form_host.hostname.data)
-        error_output = mpd_hostname.hostname_save()
-        if error_output != '':
-            flash(error_output, 'danger')
-            return redirect(url_for('index'))
-        else:
-            flash('You changes has been saved!', 'success')
-            return redirect(url_for('index'))
-    if form_wifi.submit2.data and form_wifi.validate_on_submit():
-        mpd_wifi = WifiLoginSave(form_wifi.wifi_name.data, form_wifi.password.data)
-        error_output = mpd_wifi.wifi_login_save()
-        if error_output != '':
-            flash(error_output, 'danger')
-            return redirect(url_for('index'))
-        else:
-            flash('You changes has been saved!', 'success')
-            return redirect(url_for('index'))
-    return render_template('systemconfig.html', form=form, form_host=form_host, form_wifi=form_wifi)
+    if form_audio.submit_audio.data and form_audio.validate_on_submit():
+        print form_audio.audio_output.data
+        #mpd_audio_output = AudioOutputSave(form_audio.audio_output.data)
+        #error_output = mpd_audio_output.audio_output_save()
+        #if error_output != '':
+         #   flash(error_output, 'danger')
+          #  return redirect(url_for('index'))
+        #else:
+         #   flash('You changes has been saved!', 'success')
+          #  return redirect(url_for('index'))
+    return render_template('systemconfig.html', form=form, form_audio=form_audio)
 
 
 # Function that routes to MPD configuration page
@@ -98,7 +88,7 @@ def networkconfig():
     form_host = Hostname()
     form_wifi = WifiLogin()
     # This "if" waits until POST is received
-    if form_host.submit1.data and form_host.validate_on_submit():
+    if form_host.submit_hostname.data and form_host.validate_on_submit():
         mpd_hostname = HostnameSave(form_host.hostname.data)
         error_output = mpd_hostname.hostname_save()
         if error_output != '':
@@ -107,7 +97,7 @@ def networkconfig():
         else:
             flash('You changes has been saved!', 'success')
             return redirect(url_for('index'))
-    if form_wifi.submit2.data and form_wifi.validate_on_submit():
+    if form_wifi.submit_wifi.data and form_wifi.validate_on_submit():
         mpd_wifi = WifiLoginSave(form_wifi.wifi_name.data, form_wifi.password.data)
         error_output = mpd_wifi.wifi_login_save()
         if error_output != '':

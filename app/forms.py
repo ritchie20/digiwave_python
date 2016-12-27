@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, Length
 # Form used to show an on/off menu for the Raspberry
 class RaspiOff(Form):
     on_off = RadioField('Select Reboot or Shutdown', choices=[('reboot', 'Reboot'), ('shutdown', 'Shutdown')])
-    submit3 = SubmitField("Accept")
+    submit_off = SubmitField("Accept")
 
 
 # Form to configure MPD volume and replaygain settings
@@ -34,18 +34,19 @@ class Hostname(Form):
     hostname = StringField("Hostname", [validators.length(min=4, max=30),
                                         validators.regexp('^\w+$',
                                         message="The Hostname must contain only letters, numbers or underscore")])
-    submit1 = SubmitField("Accept")
+    submit_hostname = SubmitField("Accept")
 
 
 class WifiLogin(Form):
     wifi_name = StringField("Wifi Name", [validators.DataRequired()])
     password = PasswordField("Password", [validators.DataRequired()])
-    submit2 = SubmitField("Accept")
+    submit_wifi = SubmitField("Accept")
 
 
 class AudioOutput(Form):
     audio_output = SelectField("Select Audio Output", choices=[('usb', 'USB'), ('dac', 'HifiBerry DAC+'),
                                                                ('digi', 'HifiBerry Digi+'), ('amp', 'HifiBerry Amp+')])
+    submit_audio = SubmitField("Accept")
 
 
 
