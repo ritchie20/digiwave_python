@@ -63,6 +63,3 @@
 
 # Hifiberry Amp+ configuration
 # dtoverlay=hifiberry-amp
-
-# Hifiberry Pi 1/Dac+ Light/Dac Zero/MiniAmp configuration
-# dtoverlay=hifiberry-dac

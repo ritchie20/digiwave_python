@@ -42,3 +42,12 @@ class WifiLogin(Form):
     password = PasswordField("Password", [validators.DataRequired()])
     submit2 = SubmitField("Accept")
 
+
+class AudioOutput(Form):
+    audio_output = SelectField("Select Audio Output", choices=[('usb', 'USB'), ('dac', 'HifiBerry DAC+'),
+                                                               ('digi', 'HifiBerry Digi+'), ('amp', 'HifiBerry Amp+')])
+
+
+
+
+
