@@ -100,3 +100,18 @@ class WifiLoginSave(object):
         return output
 
 
+class MpdAudioSave(object):
+
+    def __init__(self, audio_output):
+        self.audio_output = audio_output
+
+    # Calling "mpd_volume_save" script with all the form values
+    def mpd_audio_save(self):
+        print 4
+        print self.audio_output
+        # This line calls the script "mpd_volume_save", which has been given root privileges on visudo file
+        p = subprocess.Popen(["sudo", "/Users/oscar/python/flask/digiwave/app/scripts/audio_save.py",
+                              self.audio_output], stdout=subprocess.PIPE)
+        output = p.communicate()[0]
+        return output
+

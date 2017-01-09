@@ -1,7 +1,8 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
-from forms import RaspiOff, MpdVolume, MpdBuffer, Hostname, WifiLogin, AudioOutput
-from models import RaspiPower, MpdVolumeSave, MpdBufferSave, GetMpd, HostnameSave, WifiLoginSave, GetWifi
+from forms import RaspiOff, MpdVolume, MpdBuffer, Hostname, WifiLogin, MpdAudioOutput
+from models import RaspiPower, MpdVolumeSave, MpdBufferSave, GetMpd, HostnameSave, WifiLoginSave, GetWifi, \
+    MpdAudioSave
 
 
 @app.route('/')
@@ -15,24 +16,12 @@ def index():
 @app.route('/systemconfig', methods=['GET', 'POST'])
 def systemconfig():
     form = RaspiOff()
-    form_audio = AudioOutput()
     # This "if" waits until POST is received
     if form.submit_off.data and form.validate_on_submit():
         power = RaspiPower(form.on_off.data)
         power.reboot_shutdown()
-        # flash('this is a flash test, text saved')
         return redirect(url_for('index'))
-    if form_audio.submit_audio.data and form_audio.validate_on_submit():
-        print form_audio.audio_output.data
-        #mpd_audio_output = AudioOutputSave(form_audio.audio_output.data)
-        #error_output = mpd_audio_output.audio_output_save()
-        #if error_output != '':
-         #   flash(error_output, 'danger')
-          #  return redirect(url_for('index'))
-        #else:
-         #   flash('You changes has been saved!', 'success')
-          #  return redirect(url_for('index'))
-    return render_template('systemconfig.html', form=form, form_audio=form_audio)
+    return render_template('systemconfig.html', form=form)
 
 
 # Function that routes to MPD configuration page
@@ -40,6 +29,7 @@ def systemconfig():
 def mpdconfig():
     form_volume = MpdVolume()
     form_buffer = MpdBuffer()
+    form_audio_output = MpdAudioOutput()
     # Validation of "volume" form
     # //////////////////////////////
     if form_volume.validate_on_submit():
@@ -64,7 +54,17 @@ def mpdconfig():
         else:
             flash('Your changes has been saved!', 'success')
             return redirect(url_for('index'))
-    return render_template('mpdconfig.html', form_volume=form_volume, form_buffer=form_buffer)
+    if form_audio_output.submit_audio.data and form_audio_output.validate_on_submit():
+        mpd_audio_buffer = MpdAudioSave(form_audio_output.audio_output.data)
+        error_output = mpd_audio_buffer.mpd_audio_save()
+        if error_output != '':
+            flash(error_output, 'danger')
+            return redirect(url_for('index'))
+        else:
+            flash('Your changes has been saved!', 'success')
+            return redirect(url_for('index'))
+    return render_template('mpdconfig.html', form_volume=form_volume, form_buffer=form_buffer,
+                           form_audio_output=form_audio_output)
 
 
 # Sending mpd dictionary to the page

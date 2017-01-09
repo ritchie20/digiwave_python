@@ -43,9 +43,10 @@ class WifiLogin(Form):
     submit_wifi = SubmitField("Accept")
 
 
-class AudioOutput(Form):
-    audio_output = SelectField("Select Audio Output", choices=[('usb', 'USB'), ('dac', 'HifiBerry DAC+'),
-                                                               ('digi', 'HifiBerry Digi+'), ('amp', 'HifiBerry Amp+')])
+class MpdAudioOutput(Form):
+    audio_output = SelectField("Select Audio Output", choices=[('usb', 'USB'), ('hifiberry-dacplus', 'HifiBerry DAC+'),
+                                                               ('hifiberry-digi', 'HifiBerry Digi+'),
+                                                               ('hifiberry-amp', 'HifiBerry Amp+')])
     submit_audio = SubmitField("Accept")
 
 

@@ -3,7 +3,7 @@
 import subprocess
 import sys
 
-
+"""
 class GetWifi(object):
 
     def get_wifi_networks(self):
@@ -25,4 +25,12 @@ class GetWifi(object):
         # Splitting the string into a list by "\n"
         wifi_array = wifi_name.split("\n")
         return wifi_array
+"""
+
+
+class GetWifi(object):
+
+    def get_wifi_networks(self):
+        return "this is a dummy text"
+
 
