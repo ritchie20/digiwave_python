@@ -16,6 +16,7 @@ class MpdVolume(Form):
     replay_gain = SelectField("Replay Gain", choices=[('off', 'Off'), ('album', 'Album'), ('track', 'Track')])
     replaygain_preamp = IntegerField("Replay Gain Preamp", [validators.NumberRange(min=-15, max=15),
                                                             validators.Optional()])
+    submit_volume = SubmitField("Accept")
 
 
 # Form to configure MPD buffer settings
@@ -27,6 +28,7 @@ class MpdBuffer(Form):
                                                            ('40%', '40%'), ('50%', '50%'), ('60%', '60%'),
                                                            ('70%', '70%'), ('80%', '80%'), ('90%', '90%'),
                                                            ('100%', '100%')])
+    submit_buffer = SubmitField("Accept")
 
 
 # Form to save new hostname name

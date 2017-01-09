@@ -32,7 +32,7 @@ def mpdconfig():
     form_audio_output = MpdAudioOutput()
     # Validation of "volume" form
     # //////////////////////////////
-    if form_volume.validate_on_submit():
+    if form_volume.submit_volume.data and form_volume.validate_on_submit():
         mpd_volume = MpdVolumeSave(form_volume.vol_norm.data, form_volume.replay_gain.data,
                                    str(form_volume.replaygain_preamp.data))
         error_output = mpd_volume.mpd_volume_save()
@@ -45,7 +45,7 @@ def mpdconfig():
             return redirect(url_for('index'))
     # Validation of "buffer" form
     # ///////////////////////////
-    if form_buffer.validate_on_submit():
+    if form_buffer.submit_buffer.data and form_buffer.validate_on_submit():
         mpd_buffer = MpdBufferSave(form_buffer.audio_buff.data, form_buffer.buff_fill.data)
         error_output = mpd_buffer.mpd_buffer_save()
         if error_output != '':
