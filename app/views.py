@@ -12,41 +12,43 @@ def index():
     return render_template('index.html')
 
 
-# Function that routes Raspberry power handling (reboot/shutdown) and audio output
+# Function that deploy Raspberry system configs like power handling
 @app.route('/systemconfig', methods=['GET', 'POST'])
 def systemconfig():
     form = RaspiOff()
-    # This "if" waits until POST is received
+    # if submit and validation are ok, the form is received
     if form.submit_off.data and form.validate_on_submit():
+        # passing form arguments to the model object
         power = RaspiPower(form.on_off.data)
+        # calling the object method
         power.reboot_shutdown()
         return redirect(url_for('index'))
     return render_template('systemconfig.html', form=form)
 
 
-# Function that routes to MPD configuration page
+# Function that deploys MPD configuration page
 @app.route('/mpdconfig', methods=['GET', 'POST'])
 def mpdconfig():
+    # all the form objects are called
     form_volume = MpdVolume()
     form_buffer = MpdBuffer()
     form_audio_output = MpdAudioOutput()
-    # Validation of "volume" form
-    # //////////////////////////////
+    # Validation for form_volume
     if form_volume.submit_volume.data and form_volume.validate_on_submit():
         mpd_volume = MpdVolumeSave(form_volume.vol_norm.data, form_volume.replay_gain.data,
                                    str(form_volume.replaygain_preamp.data))
+        # calling the object method and checking what returns
         error_output = mpd_volume.mpd_volume_save()
-        # if error output has data, send the message to the view
         if error_output != '':
             flash(error_output, 'danger')
             return redirect(url_for('index'))
         else:
             flash('You changes has been saved!', 'success')
             return redirect(url_for('index'))
-    # Validation of "buffer" form
-    # ///////////////////////////
+    # Validation for form_buffer
     if form_buffer.submit_buffer.data and form_buffer.validate_on_submit():
         mpd_buffer = MpdBufferSave(form_buffer.audio_buff.data, form_buffer.buff_fill.data)
+        # calling the object method and checking what returns
         error_output = mpd_buffer.mpd_buffer_save()
         if error_output != '':
             flash(error_output, 'danger')
@@ -54,8 +56,10 @@ def mpdconfig():
         else:
             flash('Your changes has been saved!', 'success')
             return redirect(url_for('index'))
+    # Validation for form_audio_output
     if form_audio_output.submit_audio.data and form_audio_output.validate_on_submit():
         mpd_audio_buffer = MpdAudioSave(form_audio_output.audio_output.data)
+        # calling the object method and checking what returns
         error_output = mpd_audio_buffer.mpd_audio_save()
         if error_output != '':
             flash(error_output, 'danger')
@@ -67,14 +71,14 @@ def mpdconfig():
                            form_audio_output=form_audio_output)
 
 
-# Sending mpd dictionary to the page
+# Sending mpd configuration to the view
 @app.route('/showmpd')
 def showmpd():
     result = GetMpd()
     result = result.get_mpd_params()
     return render_template('showmpd.html', result=result)
 
-
+# Sending wifi networks to the view
 @app.route('/showwifi')
 def showwifi():
     result = GetWifi()
@@ -82,14 +86,15 @@ def showwifi():
     return render_template('showwifi.html', result=result)
 
 
-# Function that routes Raspberry hostname and wifi handling
+# Function that deploys Raspberry hostname and wifi handling
 @app.route('/networkconfig', methods=['GET', 'POST'])
 def networkconfig():
     form_host = Hostname()
     form_wifi = WifiLogin()
-    # This "if" waits until POST is received
+    # Validation for form_host
     if form_host.submit_hostname.data and form_host.validate_on_submit():
         mpd_hostname = HostnameSave(form_host.hostname.data)
+        # calling the object method and checking what returns
         error_output = mpd_hostname.hostname_save()
         if error_output != '':
             flash(error_output, 'danger')
@@ -97,8 +102,10 @@ def networkconfig():
         else:
             flash('You changes has been saved!', 'success')
             return redirect(url_for('index'))
+    # Validation for form_wifi
     if form_wifi.submit_wifi.data and form_wifi.validate_on_submit():
         mpd_wifi = WifiLoginSave(form_wifi.wifi_name.data, form_wifi.password.data)
+        # calling the object method and checking what returns
         error_output = mpd_wifi.wifi_login_save()
         if error_output != '':
             flash(error_output, 'danger')
