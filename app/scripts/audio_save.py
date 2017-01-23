@@ -44,6 +44,38 @@ def save_config(audio_output):
         return error.errno
 
 
+
+
+def save_mpdconf(audio_output):
+    try:
+        with open('/Users/oscar/mpd2.conf', 'r') as f:
+            lines = f.readlines()
+            line_number = -1
+            parameter_found = 0
+            if audio_output == "usb":
+                for line in lines:
+                    line_number += 1
+                    line = line.rstrip('\n')
+                    if "hw:" in line:
+                        parameter_found += 1
+                        lines[line_number] = "  device  \"hw:1\"\n"
+                if parameter_found == "0":
+                    return 1
+            else:
+                for line in lines:
+                    line_number += 1
+                    line = line.rstrip('\n')
+                    if "hw:" in line:
+                        parameter_found += 1
+                        lines[line_number] = "  device  \"hw:0\"\n"
+                if parameter_found == "0":
+                    return 1
+        with open('/Users/oscar/mpd2.conf', 'w') as f:
+            f.writelines(lines)
+    except IOError as error:
+        return error.errno
+
+"""
 def save_asound(audio_output):
     # Capturing error if the file doesn't exist
     try:
@@ -76,7 +108,7 @@ def save_asound(audio_output):
             f.writelines(lines)
     except IOError as error:
         return error.errno
-
+"""
 
 # assigning arguments to variables
 audio_output = sys.argv[1]
@@ -88,7 +120,7 @@ if check_error == 1:
 if check_error == 2:
     sys.stdout.write('"config.txt file does not exit"')
 
-check_error = save_asound(audio_output)
+check_error = save_mpdconf(audio_output)
 if check_error == 1:
     sys.stdout.write('"Error trying to save on asound.conf"')
 if check_error == 2:

@@ -63,3 +63,6 @@
 
 # Hifiberry Amp+ configuration
 # dtoverlay=hifiberry-amp
+
+# Bluetooth disabled
+dtoverlay=pi3-disable-bt
