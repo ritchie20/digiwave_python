@@ -21,7 +21,7 @@ class MpdVolume(Form):
 
 # Form to configure MPD buffer settings
 class MpdBuffer(Form):
-    audio_buff = SelectField("Audio Buffer (KB)", choices=[('1024', '1 MB'), ('2048', '2 MB'), ('4096', '4 MB'),
+    audio_buff = SelectField("Audio Buffer (Kb)", choices=[('1024', '1 MB'), ('2048', '2 MB'), ('4096', '4 MB'),
                                                            ('6144', '6 MB'), ('8192', '8 MB'), ('12288', '12 MB'),
                                                            ('16384', '16 MB'), ('24456', '24 MB'), ('32768', '32 MB')])
     buff_fill = SelectField("Buffer Before Play", choices=[('10%', '10%'), ('20%', '20%'), ('30%', '30%'),
@@ -50,6 +50,30 @@ class MpdAudioOutput(Form):
                                                                ('hifiberry-digi', 'HifiBerry Digi+'),
                                                                ('hifiberry-amp', 'HifiBerry Amp+')])
     submit_audio = SubmitField("Accept")
+
+
+class SqueezeOutput(Form):
+    audio_output = SelectField("Select Audio Output", choices=[('usb', 'USB'), ('hifiberry-dacplus', 'HifiBerry Dac+'),
+                                                               ('hifiberry-digi', 'Hifiberry Digi+'),
+                                                               ('hifiberry-amp', 'Hifiberry Amp+')])
+    submit_squeeze_audio = SubmitField("Accept")
+
+
+class SqueezeBuffer(Form):
+    stream_buffer = SelectField("Stream Buffer (Kb)", choices=[('1024', '1 MB'), ('2048', '2 MB'), ('4096', '4 MB'),
+                                                               ('6144', '6 MB'), ('8192', '8 MB'), ('12288', '12 MB'),
+                                                               ('16384', '16 MB'), ('24456', '24 MB'), ('32768', '32 MB')])
+    output_buffer = SelectField("Output Buffer (Kb)", choices=[('1024', '1 MB'), ('2048', '2 MB'), ('4096', '4 MB'),
+                                                               ('6144', '6 MB'), ('8192', '8 MB'), ('12288', '12 MB'),
+                                                               ('16384', '16 MB'), ('24456', '24 MB'), ('32768', '32 MB')])
+    submit_squeeze_buffer = SubmitField("Accept")
+
+
+class SqueezeDsd(Form):
+    dsd_output = SelectField("DSD Output", choices=[('pcm', 'Convert to PCM'), ('dop', 'DSD direct (DoP)')])
+    submit_squeeze_dsd = SubmitField("Accept")
+
+
 
 
 
