@@ -1,6 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app
-from forms import RaspiOff, MpdVolume, MpdBuffer, Hostname, WifiLogin, MpdAudioOutput
+from forms import RaspiOff, MpdVolume, MpdBuffer, Hostname, WifiLogin, MpdAudioOutput, SqueezeBuffer, SqueezeDsd, \
+    SqueezeOutput
 from models import RaspiPower, MpdVolumeSave, MpdBufferSave, GetMpd, HostnameSave, WifiLoginSave, GetWifi, \
     MpdAudioSave
 
@@ -114,3 +115,19 @@ def networkconfig():
             flash('You changes has been saved!', 'success')
             return redirect(url_for('index'))
     return render_template('networkconfig.html', form_host=form_host, form_wifi=form_wifi)
+
+
+@app.route('/squeezeconfig', methods=['GET', 'POST'])
+def squeezeconfig():
+    form_squeeze_buffer = SqueezeBuffer()
+    form_squeeze_output = SqueezeOutput()
+    form_squeeze_dsd = SqueezeDsd()
+    if form_squeeze_buffer.submit_squeeze_buffer.data and form_squeeze_buffer.validate_on_submit():
+        #
+    if form_squeeze_dsd.submit_squeeze_dsd.data and form_squeeze_dsd.validate_on_submit():
+        #
+    if form_squeeze_output.submit_squeeze_audio.data and form_squeeze_output.validate_on_submit():
+        #
+    return render_template('squeezeconfig.html')
+
+# creating squeezeconfig view!!!!!!!!!!!!!!!!!!!!!!!!!!!!

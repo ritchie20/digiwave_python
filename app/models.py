@@ -107,11 +107,53 @@ class MpdAudioSave(object):
 
     # Calling "mpd_volume_save" script with all the form values
     def mpd_audio_save(self):
-        print 4
-        print self.audio_output
+        #print 4
+        #print self.audio_output
         # This line calls the script "mpd_volume_save", which has been given root privileges on visudo file
         p = subprocess.Popen(["sudo", "/Users/oscar/python/flask/digiwave/app/scripts/audio_save.py",
                               self.audio_output], stdout=subprocess.PIPE)
         output = p.communicate()[0]
         return output
+
+
+class SqueezeBufferSave(object):
+
+    def __init__(self, stream_buffer, output_buffer):
+        self.stream_buffer = stream_buffer
+        self.output_buffer = output_buffer
+
+    def squeeze_buffer_save(self):
+        p = subprocess.Popen(["sudo", "/Users/oscar/python/flask/digiwave/app/scripts/squeeze_buffer_save.py",
+                              self.stream_buffer, self.output_buffer], stdout=subprocess.PIPE)
+        output = p.communicate()[0]
+        return output
+
+
+class SqueezeOutputSave(object):
+
+    def __init__(self, audio_output):
+        self.audio_output = audio_output
+
+    def squeeze_output_save(self):
+        p = subprocess.Popen(["sudo", "/Users/oscar/python/flask/digiwave/app/scripts/squeeze_output_save.py",
+                              self.audio_output], stdout=subprocess.PIPE)
+        output = p.communicate()[0]
+        return output
+
+
+class SqueezeDsdSave(object):
+
+    def __init__(self, dsd_output):
+        self.dsd_output = dsd_output
+
+    def squeeze_dsd_save(self):
+        p = subprocess.Popen(["sudo", "/Users/oscar/python/flask/digiwave/app/scripts/squeeze_dsd_save.py",
+                              self.dsd_output], stdout=subprocess.PIPE)
+        output = p.communicate()[0]
+        return output
+
+
+
+
+
 
