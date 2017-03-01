@@ -1,6 +1,7 @@
 import subprocess
 from scripts.get_mpd import GetMpd
 from scripts.get_wifi import GetWifi
+##from scripts.get_squeeze import GetSqueeze
 
 
 class RaspiPower(object):
@@ -58,15 +59,22 @@ class MpdBufferSave(object):
 class ShowMpd(object):
 
     def get_mpd(self):
-        mpd = GetMpd
-        return mpd
+        mpd = GetMpd()
+        return mpd.get_mpd_params()
 
 
 class ShowWifi(object):
 
     def get_wifi(self):
-        mpd = GetWifi
-        return mpd
+        wifi = GetWifi()
+        return wifi.get_wifi_networks()
+
+
+class ShowSqueeze(object):
+
+    def get_squeeze(self):
+        squeeze = GetSqueeze
+        return squeeze
 
 
 class HostnameSave(object):

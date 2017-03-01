@@ -2,8 +2,8 @@ from flask import render_template, url_for, flash, redirect, request
 from app import app
 from forms import RaspiOff, MpdVolume, MpdBuffer, Hostname, WifiLogin, MpdAudioOutput, SqueezeBuffer, SqueezeDsd, \
     SqueezeOutput
-from models import RaspiPower, MpdVolumeSave, MpdBufferSave, GetMpd, HostnameSave, WifiLoginSave, GetWifi, \
-    MpdAudioSave, SqueezeBufferSave, SqueezeDsdSave, SqueezeOutputSave
+from models import RaspiPower, MpdVolumeSave, MpdBufferSave, ShowMpd, HostnameSave, WifiLoginSave, ShowWifi, \
+    MpdAudioSave, SqueezeBufferSave, SqueezeDsdSave, SqueezeOutputSave, ShowSqueeze
 
 
 @app.route('/')
@@ -75,16 +75,23 @@ def mpdconfig():
 # Sending mpd configuration to the view
 @app.route('/showmpd')
 def showmpd():
-    result = GetMpd()
-    result = result.get_mpd_params()
+    result = ShowMpd()
+    result = result.get_mpd()
     return render_template('showmpd.html', result=result)
 
 # Sending wifi networks to the view
 @app.route('/showwifi')
 def showwifi():
-    result = GetWifi()
-    result = result.get_wifi_networks()
+    result = ShowWifi()
+    result = result.get_wifi()
     return render_template('showwifi.html', result=result)
+
+
+@app.route('/showsqueeze')
+def showsqueeze():
+    result = ShowSqueeze()
+    result = result.get_squeeze_params()
+    return render_template("showsqueeze.html", result=result)
 
 
 # Function that deploys Raspberry hostname and wifi handling

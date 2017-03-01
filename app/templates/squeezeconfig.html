@@ -34,8 +34,8 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <td>{{ form_squeeze_dsd.dsd_output(style= "width:110px;") }}</td>
                     <a href="#" data-toggle="popover" data-placement="bottom"
-                    data-content="This setting can have the argument 'off', 'album' or 'track'. See www.replaygain.org
-                    for more details. This setting is off by default.">
+                    data-content="'Convert to PCM' will convert the stream to PCM choosing the best sample rate.
+                    'DSD Direct' will repackage the stream to DoP maintaining the native DSD quality">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     </a>
             </div>
@@ -75,8 +75,8 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <td>{{ form_squeeze_buffer.stream_buffer(style= "width:80px;") }}</td>
                         <a href="#" data-toggle="popover" data-placement="bottom"
-                        data-content="This setting adjusts the size of internal decoded audio buffering.
-                        Changing this may have undesired effects. Don't change this if you don't know what you are doing.">
+                        data-content="This buffer stores the raw stream audio.
+                        if you want to stream the biggest chunk at the start, then you need to make this buffer bigger">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                         </a>
                 </div>
@@ -89,9 +89,8 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <td>{{ form_squeeze_buffer.output_buffer(style= "width:80px;") }}</td>
                     <a href="#" data-toggle="popover" data-placement="bottom"
-                    data-content="This setting controls the percentage of the buffer which is filled before
-                    beginning to play. Increasing this reduces the chance of audio file skipping, at the cost of increased
-                    time prior to audio playback.">
+                    data-content="This buffer decodes the audio. The decode process runs whenever there
+                                is enough data in the stream buffer and enough free space in this buffer.">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     </a>
             </div>
@@ -127,8 +126,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <td>{{ form_squeeze_output.audio_output(style= "width:110px;") }}</td>
                         <a href="#" data-toggle="popover" data-placement="bottom"
-                        data-content="This setting adjusts the size of internal decoded audio buffering.
-                        Changing this may have undesired effects. Don't change this if you don't know what you are doing.">
+                        data-content="You can choose the audio output, the options are USB and the Hifiberry family">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                         </a>
                 </div>
@@ -153,13 +151,13 @@
     <!-- ========================== -->
     <div class="bs-example">
     <!-- Button HTML (to Trigger Modal) -->
-        <a href="{{ url_for('showmpd') }}" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Current Settings</a>
+        <a href="{{ url_for('showsqueeze') }}" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Current Settings</a>
 
     <!-- Modal HTML -->
         <div id="myModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                <!-- Content will be loaded here from "showmpd.html" file -->
+                <!-- Content will be loaded here from "showsqueeze.html" file -->
                 </div>
             </div>
         </div>
