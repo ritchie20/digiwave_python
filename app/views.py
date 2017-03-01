@@ -3,7 +3,7 @@ from app import app
 from forms import RaspiOff, MpdVolume, MpdBuffer, Hostname, WifiLogin, MpdAudioOutput, SqueezeBuffer, SqueezeDsd, \
     SqueezeOutput
 from models import RaspiPower, MpdVolumeSave, MpdBufferSave, GetMpd, HostnameSave, WifiLoginSave, GetWifi, \
-    MpdAudioSave
+    MpdAudioSave, SqueezeBufferSave, SqueezeDsdSave, SqueezeOutputSave
 
 
 @app.route('/')
@@ -44,7 +44,7 @@ def mpdconfig():
             flash(error_output, 'danger')
             return redirect(url_for('index'))
         else:
-            flash('You changes has been saved!', 'success')
+            flash('Your changes has been saved!', 'success')
             return redirect(url_for('index'))
     # Validation for form_buffer
     if form_buffer.submit_buffer.data and form_buffer.validate_on_submit():
@@ -101,7 +101,7 @@ def networkconfig():
             flash(error_output, 'danger')
             return redirect(url_for('index'))
         else:
-            flash('You changes has been saved!', 'success')
+            flash('Your changes has been saved!', 'success')
             return redirect(url_for('index'))
     # Validation for form_wifi
     if form_wifi.submit_wifi.data and form_wifi.validate_on_submit():
@@ -112,7 +112,7 @@ def networkconfig():
             flash(error_output, 'danger')
             return redirect(url_for('index'))
         else:
-            flash('You changes has been saved!', 'success')
+            flash('Your changes has been saved!', 'success')
             return redirect(url_for('index'))
     return render_template('networkconfig.html', form_host=form_host, form_wifi=form_wifi)
 
@@ -123,11 +123,32 @@ def squeezeconfig():
     form_squeeze_output = SqueezeOutput()
     form_squeeze_dsd = SqueezeDsd()
     if form_squeeze_buffer.submit_squeeze_buffer.data and form_squeeze_buffer.validate_on_submit():
-        #
+        squeeze_buffer = SqueezeBufferSave(form_squeeze_buffer.stream_buffer.data,
+                                           form_squeeze_buffer.stream_buffer.data)
+        error_output = squeeze_buffer.squeeze_buffer_save()
+        if error_output != '':
+            flash(error_output, 'danger')
+            return redirect(url_for('index'))
+        else:
+            flash('Your changes has been saved', 'success')
+            return redirect(url_for('index'))
     if form_squeeze_dsd.submit_squeeze_dsd.data and form_squeeze_dsd.validate_on_submit():
-        #
+        squeeze_dsd = SqueezeDsdSave(form_squeeze_dsd.dsd_output.data)
+        error_output = squeeze_dsd.squeeze_dsd_save()
+        if error_output != '':
+            flash(error_output, 'danger')
+            return redirect(url_for('index'))
+        else:
+            flash('Your changes has been saved', 'success')
+            return redirect(url_for('index'))
     if form_squeeze_output.submit_squeeze_audio.data and form_squeeze_output.validate_on_submit():
-        #
-    return render_template('squeezeconfig.html')
-
-# creating squeezeconfig view!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        squeeze_output = SqueezeOutputSave(form_squeeze_output.audio_output.data)
+        error_output = squeeze_output.squeeze_output_save()
+        if error_output != '':
+            flash(error_output, 'danger')
+            return redirect(url_for('index'))
+        else:
+            flash('Your changes has been saved', 'success')
+            return redirect(url_for('index'))
+    return render_template('squeezeconfig.html', form_squeeze_buffer=form_squeeze_buffer,
+                           form_squeeze_output=form_squeeze_output, form_squeeze_dsd=form_squeeze_dsd)

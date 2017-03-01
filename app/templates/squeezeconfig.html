@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h3 style="text-align: center;">Configure your Squeezelite Player</h3>
+
+
+{% include "flash.html" %}
+
+<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+    <div class="well">
+
+
+
+
+        <!-- form for volume settings in the player -->
+        <!-- =================== -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <h4>DSD Output</h4>
+            </div>
+        </div>
+
+
+        <form action="" method="post" name="form_squeeze_dsd">
+        {{ form_squeeze_dsd.hidden_tag() }}
+
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+                <label>{{ form_squeeze_dsd.dsd_output.label }}</label>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <td>{{ form_squeeze_dsd.dsd_output(style= "width:110px;") }}</td>
+                    <a href="#" data-toggle="popover" data-placement="bottom"
+                    data-content="This setting can have the argument 'off', 'album' or 'track'. See www.replaygain.org
+                    for more details. This setting is off by default.">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    </a>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <label>{{ form_squeeze_dsd.submit_squeeze_dsd(class_="btn btn-default") }}</label>
+            </div>
+        </div>
+
+        </form>
+
+        <br>
+        <br>
+
+
+
+        <!-- form for buffering settings in the player -->
+        <!-- =================== -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h4>Buffering</h4>
+            </div>
+        </div>
+
+
+        <form action="" method="post" name="form_squeeze_buffer">
+            {{ form_squeeze_buffer.hidden_tag() }}
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+                    <label>{{ form_squeeze_buffer.stream_buffer.label }}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <td>{{ form_squeeze_buffer.stream_buffer(style= "width:80px;") }}</td>
+                        <a href="#" data-toggle="popover" data-placement="bottom"
+                        data-content="This setting adjusts the size of internal decoded audio buffering.
+                        Changing this may have undesired effects. Don't change this if you don't know what you are doing.">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        </a>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+                <label>{{ form_squeeze_buffer.output_buffer.label }}</label>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <td>{{ form_squeeze_buffer.output_buffer(style= "width:80px;") }}</td>
+                    <a href="#" data-toggle="popover" data-placement="bottom"
+                    data-content="This setting controls the percentage of the buffer which is filled before
+                    beginning to play. Increasing this reduces the chance of audio file skipping, at the cost of increased
+                    time prior to audio playback.">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <label>{{ form_squeeze_buffer.submit_squeeze_buffer(class_="btn btn-default") }}</label>
+            </div>
+        </div>
+
+        </form>
+
+
+        <br>
+        <br>
+
+        <!-- form to select audio output in the player -->
+    <!-- ================================== -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h4>Audio Output</h4>
+            </div>
+        </div>
+
+        <form action="" method="post" name="form_squeeze_output">
+            {{ form_squeeze_output.hidden_tag() }}
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+                    <label>{{ form_squeeze_output.audio_output.label }}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <td>{{ form_squeeze_output.audio_output(style= "width:110px;") }}</td>
+                        <a href="#" data-toggle="popover" data-placement="bottom"
+                        data-content="This setting adjusts the size of internal decoded audio buffering.
+                        Changing this may have undesired effects. Don't change this if you don't know what you are doing.">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        </a>
+                </div>
+            </div>
+
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <label>{{ form_squeeze_output.submit_squeeze_audio(class_="btn btn-default") }}</label>
+            </div>
+        </div>
+
+        </form>
+
+
+    </div>
+
+
+
+
+    <!-- modal to call showmpd page -->
+    <!-- ========================== -->
+    <div class="bs-example">
+    <!-- Button HTML (to Trigger Modal) -->
+        <a href="{{ url_for('showmpd') }}" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Current Settings</a>
+
+    <!-- Modal HTML -->
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <!-- Content will be loaded here from "showmpd.html" file -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    $('[data-toggle="popover"]').popover({
+    container: 'body'});
+</script>
+
+
+
+
+{% endblock %}
